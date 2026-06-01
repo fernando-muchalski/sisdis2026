@@ -1,0 +1,133 @@
+/*  
+    Universidade Federal do Paraná - UFPR
+    Programa de Pós-Graduação em Informática - PPGInf
+    Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+    Programa: tempo1.c
+    Autor: Fernando José Muchalski
+    Data: 05/2026
+    
+    Objetivo: 
+    Fazer cada processo testar o seguinte no anel. 
+    
+    Resumo:
+    O programa simula um sistema distribuido com N processos, onde cada processo pode sofrer falhas e se recuperar delas. 
+    Cada processo testa periodicamente o próximo processo no anel (em ordem circular), com a função status() do SMPL. 
+    O resultado de cada teste é impresso na tela. 
+    O programa termina depois de atingir um tempo máximo de simulação.            
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "smpl.h"
+
+// Definir os eventos: um processo, em algum instante de tempo, pode sofrer um evento
+
+#define test 1
+#define fault 2
+#define recovery 3
+
+// Definir o descritor do processo
+typedef struct
+{
+    int id; // Identificador de facility do SMPL
+} TipoProcesso;
+
+TipoProcesso *processo;
+
+void cabecalho(int N, int MaxTempoSimulac)
+{
+    printf("===============================================================\n");
+    printf("Universidade Federal do Paraná - UFPR\n");
+    printf("Programa de Pós-Graduação em Informática - PPGInf\n");
+    printf("Disciplina: Sistemas Distribuídos (Prof. Elias)\n\n");
+    printf("Trabalho Prático 0 - Tarefa 1\n");
+    printf("- Fazer cada um dos processos testar o seguinte no anel. \n\n");
+    printf("Configuração da simulação:\n");
+    printf("- Número de processos:  %d\n", N); 
+    printf("- Tempo total de simulação: %d\n", MaxTempoSimulac);
+    printf("- Processo 1 sofre falha no tempo 31\n");
+    printf("- Processo 1 se recupera da falha no tempo 91\n");
+    printf("===============================================================\n");
+}
+
+int main(int argc, char *argv[])
+{
+    static int N,           // numero de processos do sistema distribuido
+               token,       // indica o processo que esta executando o algoritmo distribuido
+               event,       // indica o evento que ocorreu no sistema distribuido (test, fault ou recovery)
+               r,           // variavel auxiliar para receber o resultado da requisicao de falha do processo
+               i,           // variavel auxiliar para o loop de inicializacao dos processos
+               MaxTempoSimulac = 150;   // tempo maximo de simulacao
+    
+    static char fa_name[5]; // variavel auxiliar para armazenar o nome da facility do processo a ser criado
+
+    if( argc != 2 )
+    {
+        printf("Use: %s <numero de processos>\n", argv[0]);
+        exit(1);
+    }
+
+    N = atoi(argv[1]);
+
+    smpl(0, "tempo1: Programa de simulacao de sistemas distribuidos usando SMPL");
+    reset();
+    stream(1);
+
+    //printf("Simulacao de um sistema distribuido com %d processos\n", N);
+    cabecalho(N, MaxTempoSimulac);
+
+    // inicializar os N processos do sistema distribuido
+    processo = (TipoProcesso *)malloc(N * sizeof(TipoProcesso));
+    for(i = 0; i < N; i++)
+    {
+        memset(fa_name, '\0', 5);
+        sprintf(fa_name, "%d", i);
+        processo[i].id = facility(fa_name, 1);
+    }
+
+    // fazer o escalonamento dos eventos iniciais
+    for(i = 0; i < N; i++) {
+        schedule(test, 30.0, i);   // todos os processos de 0 até N-1 vão testar na unidade de tempo 30
+    }
+
+    schedule(fault, 31.0, 1); // o processo 1 sofre uma falha na unidade de tempo 31
+    schedule(recovery, 91.0, 1); // o processo 1 se recupera na unidade de tempo 61
+
+    // loop principal do simulador
+    while( time() < MaxTempoSimulac)
+    {
+        cause(&event, &token);
+        switch(event)
+        {
+            case test:
+                // o processo está falho, então não pode testar o próximo processo
+                if( status(processo[token].id) != 0 ) {
+                    printf("Processo %d: FALHO, nao pode testar (tempo %4.1f)\n", token, time());   
+                } else {
+                    // o processo i testa o processo j, onde j é o próximo processo na ordem circular
+                    int j = (token+1) % N; 
+                    if( status(processo[j].id) == 0 ) { // o processo j está operacional, então o teste é bem-sucedido
+                        printf("Processo %d: TESTOU PROCESSO %d - CORRETO (tempo %4.1f)\n", token, j, time());
+                    }
+                    else {  // o processo j está falho, então o teste falhou
+                        printf("Processo %d: TESTOU PROCESSO %d - FALHO (tempo %4.1f)\n", token, j, time());
+                    }
+                }
+                schedule(test, 30.0, token); // o processo volta a testar depois de 30 unidades de tempo
+                break;
+                
+            case fault:
+                r = request(processo[token].id, token, 0); // o processo token sofre uma falha
+                printf("Processo %d: SOFREU FALHA (tempo %4.1f)\n", token, time());
+                break;
+
+            case recovery:
+                release(processo[token].id, token); // o processo token se recupera da falha
+                printf("Processo %d: RECUPERADO DA FALHA (tempo %4.1f)\n", token, time());
+                break;
+        }
+    }
+
+    return 0;
+}

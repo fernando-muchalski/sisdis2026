@@ -12,6 +12,19 @@
         h1, h2 {
             color: #2c3e50;
         }
+        .header-section {
+            background: #ffffff;
+            padding: 18px 24px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0 0 8px rgba(0,0,0,0.06);
+        }
+        .header-section p {
+            margin: 6px 0;
+            line-height: 1.5;
+            color: #333;
+        }
         .section {
             background: white;
             padding: 20px;
@@ -31,69 +44,125 @@
             padding: 10px;
             overflow-x: auto;
         }
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        .task-table th,
+        .task-table td {
+            border: 1px solid #dcdcdc;
+            padding: 12px 10px;
+            text-align: left;
+        }
+        .task-table th {
+            background: #f0f4f8;
+        }
+        .task-table tr:nth-child(even) {
+            background: #fafafa;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Trabalho de Sistemas Distribuídos</h1>
-
-    <div class="section">
-        <h2>📌 Descrição do Algoritmo</h2>
-        <p>
-            Aqui você deve explicar o algoritmo implementado.
-            Exemplo: comunicação cliente-servidor usando sockets.
-        </p>
-
-        <h3>Objetivo</h3>
-        <p>
-            Descreva o problema que você resolveu.
-        </p>
-
-        <h3>Como funciona</h3>
-        <p>
-            Explique passo a passo o funcionamento do sistema.
-        </p>
-
-        <h3>Diagrama</h3>
-        <p>Exemplo simples:</p>
-        <pre>
-Cliente -----> Servidor
-   |              |
- envia req     processa
-   |              |
- recebe resp <----
-        </pre>
+    <div class="header-section">
+        <h1>Trabalho Prático de Sistemas Distribuídos</h1>
+        <p>Fernando José Muchalski</p>
+        <p>Programa de Pós-Graduação em Informática - PPGInf</p>
+        <p>Universidade Federal do Paraná (UFPR)</p>
+        <p>Curitiba – PR – Brasil</p>
     </div>
 
     <div class="section">
-        <h2>💻 Código Fonte</h2>
-        <p>Os códigos estão disponíveis abaixo:</p>
-        <ul>
-            <li><a href="cliente.py.txt" target="_blank">cliente.py.txt</a></li>
-            <li><a href="servidor.py.txt" target="_blank">servidor.py.txt</a></li>
-        </ul>
+        <h2>Trabalho Prático 0</h2>
+        <h3>Roteiro de Aprendizado Prático de Simulação</h3>
+        <p>
+            Esta seção apresenta o desenvolvimento do <u>Trabalho Prático 0</u>, cujo objetivo foi proporcionar o aprendizado inicial da ferramenta de simulação SMPL, empregada na modelagem e análise de sistemas distribuídos. 
+        </p>
+        <p>
+            Ao longo das atividades, os programas desenvolvidos evoluiram gradativamente em complexidade, iniciando com a execução de um exemplo básico e avançando para implementações relacionadas a testes de falhas, monitoramento de processos e manutenção de informações de estado em um sistema organizado em anel. 
+        </p>
+        <p>
+            As tarefas foram estruturadas de forma incremental, permitindo a compreensão dos conceitos de tolerância a falhas e disseminação de informações entre processos. Como resultado final, a última atividade correspondeu à implementação do algoritmo vRing.
+        </p>
+
     </div>
 
     <div class="section">
-        <h2>🧪 Logs de Testes</h2>
+        <h2>Entregas (Trabalho Prático 0)</h2>
+        <p>A tabela abaixo reúne cada tarefa com uma descrição resumida e os links correspondentes para visualização do código-fonte e arquivo de LOG.</p>
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Tarefa</th>
+                    <th>Descrição</th>
+                    <th>Código-fonte</th>
+                    <th>Log</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tarefa 0</td>
+                    <td>Executar o exemplo inicial do SMPL, compilando e rodando o programa de simulação básica.</td>
+                    <td><a href="trabalho0/tempo0.c.txt" target="_blank">tempo0.c</a></td>
+                    <td><a href="trabalho0/tempo0.log.txt" target="_blank">tempo0.log</a></td>
+                </tr>
+                <tr>
+                    <td>Tarefa 1</td>
+                    <td>Fazer cada processo testar o seguinte no anel usando a função <em>status()</em> e imprimir resultado de cada teste.</td>
+                    <td><a href="trabalho0/tempo1.c.txt" target="_blank">tempo1.c</a></td>
+                    <td><a href="trabalho0/tempo1.log.txt" target="_blank">tempo1.log</a></td>
+                </tr>
+                <tr>
+                    <td>Tarefa 2</td>
+                    <td>Fazer cada processo correto testar sequencialmente até encontrar outro processo correto.</td>
+                    <td><a href="trabalho0/tempo2.c.txt" target="_blank">tempo2.c</a></td>
+                    <td><a href="trabalho0/tempo2.log.txt" target="_blank">tempo2.log</a></td>
+                </tr>
+                <tr>
+                    <td>Tarefa 3</td>
+                    <td>Fazer cada processo manter localmente o vetor <code>State[N]</code> com os estados dos demais processos. Os possíveis valores para estado são -1 (unknown), 0 (correto) e 1 (falho).</td>
+                    <td><a href="trabalho0/tempo3.c.txt" target="_blank">tempo3.c</a></td>
+                    <td><a href="trabalho0/tempo3.log.txt" target="_blank">tempo3.log</a></td>
+                </tr>
+                <tr>
+                    <td>Tarefa 4</td>
+                    <td>Ao testar processo correto, obter dele as informações de estado dos demais processos. Essa tarefa simula o algoritmo vRing</td>
+                    <td><a href="trabalho0/tempo4.c.txt" target="_blank">tempo4.c</a></td>
+                    <td><a href="trabalho0/tempo4.log.txt" target="_blank">tempo4.log</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Trabalho Prático 1</h2>
+        <h3>Dois Algoritmos para Eleição Distribuída de Líder em Anel</h3>
         <p>
-            Abaixo estão os testes realizados para validar o funcionamento:
+            Nesta seção são apresentados os resultados do <strong>Trabalho Prático 1</strong>, com dois algoritmos de eleição de líder em anel e os logs de execução.
         </p>
-
+        <p>
+            O primeiro algoritmo é baseado na versão de <em>Chang-Roberts</em>, em que candidatos enviam suas identificações ao longo do anel e o maior identificador se torna líder. O segundo é um algoritmo aleatorizado de eleição em rodadas, onde processos sorteiam bits e apenas candidatos continuam competindo até haver um único líder.
+        </p>
+        <h3>Descrição geral dos algoritmos</h3>
+        <p>
+            <strong>Algoritmo 1 (Chang-Roberts):</strong> cada candidato envia seu identificador ao processo seguinte no anel. Mensagens com identificador maior substituem o valor local de liderança e são repassadas. Quando uma mensagem retorna ao remetente original, esse processo é reconhecido como líder.
+        </p>
+        <p>
+            <strong>Algoritmo 2 (aleatorizado):</strong> o algoritmo opera em rodadas. Em cada rodada, processos geram bits aleatórios e apenas os com bit = 1 tornam-se candidatos. Essas candidaturas circulam no anel e as rodadas continuam até que um único processo seja eleito líder.
+        </p>
+        <h3>Logs e explicações</h3>
+        <p>
+            O código de referência para o algoritmo Chang-Roberts está em <a href="trabalho1/chang-roberts.c.txt" target="_blank">trabalho1/chang-roberts.c.txt</a>.
+        </p>
         <ul>
-            <li><a href="log_testes.txt" target="_blank">Ver log completo</a></li>
+            <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 1 candidato.</li>
+            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com todos os processos como candidatos.</li>
+            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução aleatorizada com candidatos sorteados.</li>
         </ul>
-
-        <h3>Exemplo de saída:</h3>
-        <pre>
-Teste 1:
-Cliente envia "Olá"
-Servidor responde "OK"
-
-Teste 2:
-Cliente envia "Ping"
-Servidor responde "Pong"
-        </pre>
+        <p>
+            Os logs devem ser usados para descrever o líder eleito, o número de mensagens trocadas e o tempo de simulação em cada caso.
+        </p>
     </div>
 
 </body>

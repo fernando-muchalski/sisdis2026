@@ -1,0 +1,353 @@
+/*
+    Universidade Federal do Paraná - UFPR
+    Programa de Pós-Graduação em Informática - PPGInf
+    Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+    Programa: chang-roberts.c
+    Autor: Fernando José Muchalski
+    Data Modificação: 31/05/2026
+
+    Objetivo:
+    Implementar o algoritmo de eleição de líder com candidatos baseado em Chang-Roberts no anel (VRing)..
+
+    Resumo:
+
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "smpl.h"
+
+// Definir os eventos: um processo, em algum instante de tempo, pode sofrer um evento
+
+#define test 1
+#define fault 2
+#define recovery 3
+
+#define election 4 // evento para iniciar a eleição do líder
+
+// Definir o descritor do processo
+typedef struct
+{
+    int id;            // Identificador de facility do SMPL
+    int lider;         // Variável para armazenar o identificador do processo lider
+    int sou_candidato; // Variável para indicar se o processo é um candidato à liderança (1) ou não (0)
+} TipoProcesso;
+
+// Define uma estrutura para armazenar as informações das mensagens de eleição, que serão enviadas entre os processos durante a eleição do líder
+typedef struct message
+{
+    int candidato; // Identificador do processo candidato à liderança
+    struct message *prox; // Ponteiro para a próxima mensagem na fila de mensagens de eleição
+} Message;
+
+TipoProcesso *processo;
+Message **cand_msg;     // Fila de mensagens de eleição, onde cada processo pode receber uma mensagem de eleição com o identificador do candidato à liderança
+
+void cabecalho(int N, int num_candidatos, int MaxTempoSimulac, TipoProcesso *processo)
+{
+    printf("===============================================================\n");
+    printf("Universidade Federal do Paraná - UFPR\n");
+    printf("Programa de Pós-Graduação em Informática - PPGInf\n");
+    printf("Disciplina: Sistemas Distribuídos (Prof. Elias)\n\n");
+    printf("Trabalho Prático 1 - Algoritmo 1\n");
+    printf("- Implementar o algoritmo de eleição de lider com candidatos baseado\n");
+    printf("  em Chang-Roberts no anel (VRing). \n\n");
+    printf("Configuração da simulação:\n");
+    printf("- Número de processos:  %d\n", N);
+    printf("- Tempo total de simulação: %d\n", MaxTempoSimulac);
+    printf("- Número de candidatos à liderança: %d\n", num_candidatos);
+    printf("- Candidatos à liderança:\n");
+    for (int i = 0; i < N; i++)
+    {
+        if (processo[i].sou_candidato)
+        {
+            printf("\tProcesso (%d)\n", i);
+        }
+    }
+
+    printf("===============================================================\n");
+}
+
+/*
+* Função para adicionar uma mensagem de eleição na fila para o processo j, indicando que o processo candidato é o candidato à liderança
+*/
+void encaminharCandidato(Message** cand_msg, int j, int candidato) {
+
+    Message *nova_msg = (Message *)malloc(sizeof(Message)); // alocar memória para a nova mensagem de eleição
+    nova_msg->candidato = candidato; // definir o campo candidato da nova mensagem com o
+    nova_msg->prox = NULL; // definir o campo prox da nova mensagem como NULL, indicando que é a última mensagem da fila
+
+    if (cand_msg[j] == NULL) { // se a fila de mensagens de eleição para o processo j estiver vazia
+        cand_msg[j] = nova_msg; // a nova mensagem se torna a primeira mensagem da fila
+    } else { // se a fila de mensagens de eleição para o processo j não estiver vazia
+        Message *temp = cand_msg[j]; // criar um ponteiro temporário para percorrer a fila de mensagens
+        while (temp->prox != NULL) { // percorrer a fila de mensagens até chegar na última mensagem
+            temp = temp->prox; // avançar para a próxima mensagem da fila
+        }
+        temp->prox = nova_msg; // adicionar a nova mensagem no final da fila
+    }
+}
+
+/*
+* Função para receber uma mensagem de eleição da fila para o processo j, retornando o candidato à liderança recebido
+* ou -1 se não houver nenhuma mensagem de eleição na fila
+*/
+int receberCandidato(Message** cand_msg, int j) {
+    int candidato = -1; // variável para armazenar o candidato à liderança recebido, inicializada como -1, indicando que ainda não foi recebido nenhum candidato
+    if (cand_msg[j] != NULL) { // se a fila de mensagens de eleição para o processo j não estiver vazia
+        Message *temp = cand_msg[j]; // criar um ponteiro temporário para percorrer a fila de mensagens
+        cand_msg[j] = temp->prox; // remover a primeira mensagem da fila, atualizando o ponteiro para a próxima mensagem
+        candidato = temp->candidato; // obter o candidato à liderança da mensagem removida da fila
+        free(temp); // liberar a memória da mensagem removida
+    }
+    return candidato; // retornar o candidato à liderança recebido, ou -1 se não houver nenhuma mensagem de eleição na fila
+}
+
+int main(int argc, char *argv[])
+{
+    static int N,              // numero de processos do sistema distribuido
+        token,                 // indica o processo que esta executando o algoritmo distribuido
+        event,                 // indica o evento que ocorreu no sistema distribuido (test, fault ou recovery)
+        r,                     // variavel auxiliar para receber o resultado da requisicao de falha do processo
+        i,                     // variavel auxiliar para o loop de inicializacao dos processos
+        MaxTempoSimulac = 210; // tempo maximo de simulacao
+
+    static char fa_name[5]; // variavel auxiliar para armazenar o nome da facility do processo a ser criado
+
+    if (argc < 2)
+    {
+        printf("Use: %s <numero de processos> [numero de candidatos]\n", argv[0]);
+        printf("  - numero de processos: quantidade de processos no anel\n");
+        printf("  - numero de candidatos: opcional, se não informado, será escolhido aleatoriamente\n\n");
+        printf("Exemplos:\n");
+        printf("  %s 10      -> numero de candidatos escolhido aleatoriamente\n", argv[0]);
+        printf("  %s 10 1    -> um unico candidato\n", argv[0]);
+        printf("  %s 10 10   -> todos os processos sao candidatos\n", argv[0]);
+        exit(1);
+    }
+
+    srand(1); // definir a semente para a geração de números aleatórios, garantindo que a reprodução produza os mesmos resultados em múltiplas execuções
+
+    N = atoi(argv[1]);
+
+    int num_candidatos = 0; // variavel para armazenar o numero de candidatos à liderança
+    if (argc == 3)
+    {
+        num_candidatos = atoi(argv[2]);
+        if (num_candidatos < 1 || num_candidatos > N)
+        {
+            num_candidatos = 0; // se o numero de candidatos for invalido, sera escolhido aleatoriamente
+        }
+    }
+    if (!num_candidatos) // se o numero de candidatos for 0, significa que o numero de candidatos sera escolhido aleatoriamente
+    {
+        num_candidatos = rand() % N + 1; // escolher um numero aleatorio de candidatos entre 1 e N
+    }
+
+    smpl(0, "chang-roberts: Simulacao de eleição de líder usando SMPL");
+    reset();
+    stream(1);
+
+    // inicializar os N processos do sistema distribuido
+    processo = (TipoProcesso *)malloc(N * sizeof(TipoProcesso));
+
+    // inicializar o vetor de mensagens para a eleição do líder,
+    cand_msg = (Message **)malloc(N * sizeof(Message *)); // alocar o vetor de mensagens, onde cada processo pode receber uma mensagem de eleição
+
+    // inicializar os processos do sistema distribuido alocando as facilities, os vetores de estado e definindo o lider inicial (se for candidato)
+    for (i = 0; i < N; i++)
+    {
+        memset(fa_name, '\0', 5);
+        sprintf(fa_name, "%d", i);
+        processo[i].id = facility(fa_name, 1);
+        processo[i].lider = -1; // inicializar o lider como -1, indicando que ainda não há um líder eleito
+        processo[i].sou_candidato = 0; // inicializar o processo como não candidato à liderança, por padrão
+    }
+
+    // escolher aleatoriamente os processos candidatos à liderança
+    int cont = 0; // contador para controlar quantos candidatos já foram escolhidos
+    while (cont < num_candidatos)
+    {
+        int candidato = rand() % N;             // escolher um processo aleatoriamente para ser candidato
+        if (!processo[candidato].sou_candidato) // se o processo escolhido ainda não for candidato
+        {
+            processo[candidato].sou_candidato = 1; // marcar o processo como candidato
+            cont++;                                // incrementar o contador de candidatos
+            processo[i].lider = i;                 // o processo inicialmente se considera lider, pois ele é um candidato à liderança
+        }
+    }
+
+    // cabeçalho de LOG
+    cabecalho(N, num_candidatos, MaxTempoSimulac, processo);
+
+ 
+    // fazer o escalonamento dos eventos iniciais
+    // Todos os processos do sistema vão testar o estado do líder a cada 5 unidades de tempo
+    // para verificar se o líder atual está falho e iniciar uma nova eleição do líder, caso necessario
+    for (i = 0; i < N; i++)
+    {
+        schedule(test, 5.0, i); // todos os processos de 0 até N-1 vão testar na unidade de tempo 5
+    }
+
+    // todos os processos candidatos iniciam a eleição do líder
+    for (i = 0; i < N; i++)
+    {
+        // inicializar o vetor de mensagens, onde o campo id_candidato é -1, indicando que o processo ainda não recebeu nenhuma mensagem de eleição
+        cand_msg[i] = NULL; // inicializar o ponteiro para a próxima mensagem como NULL
+
+        // agenda o inicio da eleição do líder para os processos candidatos à liderança
+        if (processo[i].sou_candidato)
+        {
+            // inicialmente envia um candidado desconhecido (-1) para dar inicio a simulação da eleição do líder
+            encaminharCandidato(cand_msg, i, -1); 
+            printf("Processo %d: DEFINIDO COMO CANDIDATO (tempo %4.1f)\n", i, time());
+            schedule(election, 1.0, i); // o processo candidato inicia a eleição do líder no tempo 30
+        }
+    }
+    printf("\n");
+
+    // variavel auxiliar para indicar o estado do processo alterado na rodada
+    char *estado_alterado;
+    estado_alterado = (char *)malloc(N * sizeof(char));
+
+    int num_mensagens = 0;
+    int num_descartadas = 0;
+    double ini_eleicao = -1;  // armazenar o tempo de início da eleição do líder, para calcular o tempo total da eleição do líder quando um líder for eleito
+
+    // variavel para controlar a rodada em que o lider foi eleito
+    // o objetivo é simular uma falha após a primeira eleição
+    // inicializando em 0: não será agendada falha
+    // inicializando em 1: será agendada uma falha para o lider
+    int falha = 0;
+
+    // loop principal do simulador
+    while (time() < MaxTempoSimulac)
+    {
+        cause(&event, &token);
+        switch (event)
+        {
+        case test:
+
+            // se o lider falha, inicia uma nova eleição do líder, pois o lider atual não é mais confiável
+            if (processo[token].lider != -1 && status(processo[processo[token].lider].id) != 0)
+            {
+                printf("Processo %d: LIDER FALHO DETECTADO (tempo %4.1f)\n", token, time());
+                processo[token].lider = -1; // o processo token não tem mais um líder confiável, então ele redefine o lider como -1, indicando que ainda não há um líder eleito
+                processo[token].sou_candidato = 1; // o processo token se torna um candidato à liderança, pois ele não tem mais um líder confiável
+                encaminharCandidato(cand_msg, token, -1); // o processo token envia uma mensagem de eleição com um candidato desconhecido (-1) para dar início a nova eleição do líder
+                schedule(election, 1.0, token); // o processo token inicia a eleição do líder no tempo atual + 1
+                break;
+            }
+
+            schedule(test, 30.0, token); // o processo volta a testar depois de 30 unidades de tempo
+            break;
+
+        case fault:
+            r = request(processo[token].id, token, 0); // o processo token sofre uma falha
+            printf("Processo %d: SOFREU FALHA (tempo %4.1f)\n", token, time());
+            break;
+
+        case recovery:
+            release(processo[token].id, token); // o processo token se recupera da falha
+            printf("Processo %d: RECUPERADO DA FALHA (tempo %4.1f)\n", token, time());
+            break;
+
+        case election:
+            
+            // se o processo token estiver falho, ele não pode participar da eleição do líder
+            if (status(processo[token].id) != 0)
+            {
+                printf("Processo %d: FALHO, nao pode participar da eleicao (tempo %4.1f)\n", token, time());
+                break;
+            }
+
+            // o processo token verifica a mensagem de eleição recebida com o campo que indica o candidato à liderança 
+            int candidato = receberCandidato(cand_msg, token); // o processo token recebe a mensagem de eleição da fila, obtendo o candidato à liderança recebido, ou -1 se não houver nenhuma mensagem de eleição na fila
+    
+            // se o processo token não recebeu nenhuma mensagem de eleição (candidato = -1) então ainda não há lider definido
+            if (candidato == -1)
+            { 
+                // Se o processo token for um candidato à liderança, ele inicia a eleição do líder enviando uma mensagem de eleição para o próximo processo na ordem circular
+                if( processo[token].sou_candidato ) {
+                    if(ini_eleicao < 0) {
+                        ini_eleicao = time(); // armazenar o tempo de início da eleição do líder, para calcular o tempo total da eleição do líder quando um líder for eleito
+                    }
+                    printf("Processo %d: INICIANDO ELEICAO DO LIDER (tempo %4.1f)\n", token, time());
+                    processo[token].lider = token; // o processo token se considera líder, pois ele é um candidato à liderança
+                    candidato = token;             // o processo token se considera candidato à liderança, pois ele é um candidato à liderança
+                }
+            } else {
+                if (processo[token].sou_candidato && candidato == token)
+                { // lider eleito, o processo token recebeu uma mensagem de eleição com o seu próprio identificador, indicando que ele é o líder eleito
+                    printf("Processo %d: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (%d) - LIDER ELEITO! (tempo %4.1f)\n", token, candidato, time());
+
+                    printf("----------------------------------------------\n");
+                    printf("Lider Eleito...: %d\n", processo[token].lider);
+                    printf("Mensagens transmitidas: %d\n", num_mensagens);
+                    printf("Mensagens descartadas.: %d\n", num_descartadas);
+                    printf("Tempo Eleicao..: %4.1f\n", time() - ini_eleicao);
+                    printf("----------------------------------------------\n");
+                    
+                    ini_eleicao = -1; // resetar o tempo de início da eleição do líder para calcular o tempo da próxima eleição do líder, caso haja uma falha do líder eleito
+                    printf("Estado final do anel:\n"); 
+                    for(i = 0; i < N; i++) {
+                        printf("Processo %d: ", i);
+                        if (status(processo[i].id) == 0) {
+                            printf("CORRETO, ");
+                        } else {
+                            printf("FALHO, ");
+                        }
+                        printf("Lider Local: %d\n", processo[i].lider);
+                    }
+
+                    if( falha == 1 ) {
+                        falha = 0;
+                        // agenda uma falha para o líder eleito depois de 10 unidades de tempo, para testar se os processos do anel conseguem detectar a falha do líder e iniciar uma nova eleição do líder 
+                        schedule(fault, 10.0, token);
+                    }
+
+                    break;
+                }
+
+                if (candidato > processo[token].lider)
+                { // se o processo token recebeu uma mensagem de eleição com um candidato melhor do que o candidato que ele já conhece, ele atualiza a mensagem de eleição com o melhor candidato encontrado
+                    printf("Processo %d: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (%d) (tempo %4.1f)\n", token, candidato, time());
+                    printf("\tLider local:  %d\n", processo[token].lider);
+                    processo[token].lider = candidato; // o processo token atualiza o candidato que ele conhece para o candidato da mensagem de eleição recebida
+                    printf("\tLider local atualizado para %d\n", processo[token].lider);
+                    if( processo[token].sou_candidato ) {
+                    // o processo token deixa de ser um candidato à liderança, pois ele encontrou um candidato melhor do que ele mesmo
+                        processo[token].sou_candidato = 0; 
+                    }
+                }
+                else
+                { // o processo token recebeu uma mensagem de eleição com um candidato pior do que o candidato que ele já conhece, então ele mantém o candidato que ele conhece
+                    printf("Processo %d: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (%d) (tempo %4.1f)\n", token, candidato, time());
+                    printf("\tLider local:  %d\n", processo[token].lider);
+                    printf("\tMensagem descartada!\n\n");
+                    num_descartadas++; // incrementa o contador de mensagens de eleição descartadas
+                    break;
+                }
+            }
+
+            // encontra o próximo processo na ordem circular que esteja correto para enviar a mensagem de eleição com o candidato atualizado
+            int j = (token + 1) % N;
+            while (j != token && status(processo[j].id) != 0)
+            {
+                    j = (j + 1) % N;
+            }
+            printf("Processo %d: ENVIA CANDIDATO (%d) PARA O PROCESSO %d (tempo %4.1f)\n\n", token, candidato, j, time());
+            // o candidado é colocado na fila de mensagens de eleição para o processo j, indicando que o processo candidato é o candidato à liderança encontrado pelo processo token
+            encaminharCandidato(cand_msg, j, candidato); 
+
+            // o processo token encaminha a mensagem de eleição para o próximo processo 
+            schedule(election, 1.0, j);
+
+            // incrementa o contador de mensagens de eleição enviadas
+            num_mensagens++; 
+        }
+
+    }
+    return 0;
+}

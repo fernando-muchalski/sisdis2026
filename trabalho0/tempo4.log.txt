@@ -1,0 +1,142 @@
+===============================================================
+Universidade Federal do Paraná - UFPR
+Programa de Pós-Graduação em Informática - PPGInf
+Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+Trabalho Prático 0 - Tarefa 4
+- Fazer cada processo correto, ao testar outro processo correto, obter as informações
+  do estado dos demais processos. 
+
+Configuração da simulação:
+- Número de processos:  5
+- Tempo total de simulação: 210
+- Processo 1, 2, 3 e 4 sofre falha no tempo 31
+- Processo 2, 3 e 4 se recupera da falha no tempo 61
+- Processo 1 se recupera da falha no tempo 91
+
+Observações:
+- O estado de um processo pode ser: -1 (desconhecido), 0 (correto) ou 1 (falho)
+- O (*) indica que o estado foi atualiado na rodada atual, após teste direto
+- O (+) indica que o estado foi atualiado na rodada atual, porém obtido indiretamente do processo testado
+===============================================================
+Processo 0: TESTOU PROCESSO 1 - CORRETO (tempo 30.0)
+Obtendo informações de estados do PROCESSO 1: [ -1, 0, -1, -1, -1 ]
+Vetor de estados PROCESSO 0: [ 0 , 0*, -1 , -1 , -1  ]
+---------------------------------------------------------------
+Processo 1: TESTOU PROCESSO 2 - CORRETO (tempo 30.0)
+Obtendo informações de estados do PROCESSO 2: [ -1, -1, 0, -1, -1 ]
+Vetor de estados PROCESSO 1: [ -1 , 0 , 0*, -1 , -1  ]
+---------------------------------------------------------------
+Processo 2: TESTOU PROCESSO 3 - CORRETO (tempo 30.0)
+Obtendo informações de estados do PROCESSO 3: [ -1, -1, -1, 0, -1 ]
+Vetor de estados PROCESSO 2: [ -1 , -1 , 0 , 0*, -1  ]
+---------------------------------------------------------------
+Processo 3: TESTOU PROCESSO 4 - CORRETO (tempo 30.0)
+Obtendo informações de estados do PROCESSO 4: [ -1, -1, -1, -1, 0 ]
+Vetor de estados PROCESSO 3: [ -1 , -1 , -1 , 0 , 0* ]
+---------------------------------------------------------------
+Processo 4: TESTOU PROCESSO 0 - CORRETO (tempo 30.0)
+Obtendo informações de estados do PROCESSO 0: [ 0, 0, -1, -1, -1 ]
+Vetor de estados PROCESSO 4: [ 0*, 0+, -1 , -1 , 0  ]
+---------------------------------------------------------------
+Processo 1: SOFREU FALHA (tempo 31.0)
+Processo 2: SOFREU FALHA (tempo 31.0)
+Processo 3: SOFREU FALHA (tempo 31.0)
+Processo 4: SOFREU FALHA (tempo 31.0)
+Processo 0: TESTOU PROCESSO 1 - FALHO (tempo 60.0), continuando...
+Processo 0: TESTOU PROCESSO 2 - FALHO (tempo 60.0), continuando...
+Processo 0: TESTOU PROCESSO 3 - FALHO (tempo 60.0), continuando...
+Processo 0: TESTOU PROCESSO 4 - FALHO (tempo 60.0), continuando...
+Processo 0: TESTOU TODOS OS PROCESSOS - FALHO (tempo 60.0)
+Vetor de estados PROCESSO 0: [ 0 , 1*, 1*, 1*, 1* ]
+---------------------------------------------------------------
+Processo 1: FALHO, nao pode testar (tempo 60.0)
+Processo 2: FALHO, nao pode testar (tempo 60.0)
+Processo 3: FALHO, nao pode testar (tempo 60.0)
+Processo 4: FALHO, nao pode testar (tempo 60.0)
+Processo 2: RECUPERADO DA FALHA (tempo 61.0)
+Processo 3: RECUPERADO DA FALHA (tempo 61.0)
+Processo 4: RECUPERADO DA FALHA (tempo 61.0)
+Processo 0: TESTOU PROCESSO 1 - FALHO (tempo 90.0), continuando...
+Processo 0: TESTOU PROCESSO 2 - CORRETO (tempo 90.0)
+Obtendo informações de estados do PROCESSO 2: [ -1, -1, 0, 0, -1 ]
+Vetor de estados PROCESSO 0: [ 0 , 1*, 0*, 0+, 1  ]
+---------------------------------------------------------------
+Processo 1: FALHO, nao pode testar (tempo 90.0)
+Processo 2: TESTOU PROCESSO 3 - CORRETO (tempo 90.0)
+Obtendo informações de estados do PROCESSO 3: [ -1, -1, -1, 0, 0 ]
+Vetor de estados PROCESSO 2: [ -1 , -1 , 0 , 0*, 0+ ]
+---------------------------------------------------------------
+Processo 3: TESTOU PROCESSO 4 - CORRETO (tempo 90.0)
+Obtendo informações de estados do PROCESSO 4: [ 0, 0, -1, -1, 0 ]
+Vetor de estados PROCESSO 3: [ 0+, 0+, -1 , 0 , 0* ]
+---------------------------------------------------------------
+Processo 4: TESTOU PROCESSO 0 - CORRETO (tempo 90.0)
+Obtendo informações de estados do PROCESSO 0: [ 0, 1, 0, 0, 1 ]
+Vetor de estados PROCESSO 4: [ 0*, 1+, 0+, 0+, 0  ]
+---------------------------------------------------------------
+Processo 1: RECUPERADO DA FALHA (tempo 91.0)
+Processo 0: TESTOU PROCESSO 1 - CORRETO (tempo 120.0)
+Obtendo informações de estados do PROCESSO 1: [ -1, 0, 0, -1, -1 ]
+Vetor de estados PROCESSO 0: [ 0 , 0*, 0+, 0 , 1  ]
+---------------------------------------------------------------
+Processo 1: TESTOU PROCESSO 2 - CORRETO (tempo 120.0)
+Obtendo informações de estados do PROCESSO 2: [ -1, -1, 0, 0, 0 ]
+Vetor de estados PROCESSO 1: [ -1 , 0 , 0*, 0+, 0+ ]
+---------------------------------------------------------------
+Processo 2: TESTOU PROCESSO 3 - CORRETO (tempo 120.0)
+Obtendo informações de estados do PROCESSO 3: [ 0, 0, -1, 0, 0 ]
+Vetor de estados PROCESSO 2: [ 0+, 0+, 0 , 0*, 0+ ]
+---------------------------------------------------------------
+Processo 3: TESTOU PROCESSO 4 - CORRETO (tempo 120.0)
+Obtendo informações de estados do PROCESSO 4: [ 0, 1, 0, 0, 0 ]
+Vetor de estados PROCESSO 3: [ 0+, 1+, 0+, 0 , 0* ]
+---------------------------------------------------------------
+Processo 4: TESTOU PROCESSO 0 - CORRETO (tempo 120.0)
+Obtendo informações de estados do PROCESSO 0: [ 0, 0, 0, 0, 1 ]
+Vetor de estados PROCESSO 4: [ 0*, 0+, 0+, 0+, 0  ]
+---------------------------------------------------------------
+Processo 0: TESTOU PROCESSO 1 - CORRETO (tempo 150.0)
+Obtendo informações de estados do PROCESSO 1: [ -1, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 0: [ 0 , 0*, 0+, 0+, 0+ ]
+---------------------------------------------------------------
+Processo 1: TESTOU PROCESSO 2 - CORRETO (tempo 150.0)
+Obtendo informações de estados do PROCESSO 2: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 1: [ 0+, 0 , 0*, 0+, 0+ ]
+---------------------------------------------------------------
+Processo 2: TESTOU PROCESSO 3 - CORRETO (tempo 150.0)
+Obtendo informações de estados do PROCESSO 3: [ 0, 1, 0, 0, 0 ]
+Vetor de estados PROCESSO 2: [ 0+, 1+, 0 , 0*, 0+ ]
+---------------------------------------------------------------
+Processo 3: TESTOU PROCESSO 4 - CORRETO (tempo 150.0)
+Obtendo informações de estados do PROCESSO 4: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 3: [ 0+, 0+, 0+, 0 , 0* ]
+---------------------------------------------------------------
+Processo 4: TESTOU PROCESSO 0 - CORRETO (tempo 150.0)
+Obtendo informações de estados do PROCESSO 0: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 4: [ 0*, 0+, 0+, 0+, 0  ]
+---------------------------------------------------------------
+Processo 0: TESTOU PROCESSO 1 - CORRETO (tempo 180.0)
+Obtendo informações de estados do PROCESSO 1: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 0: [ 0 , 0*, 0+, 0+, 0+ ]
+---------------------------------------------------------------
+Processo 1: TESTOU PROCESSO 2 - CORRETO (tempo 180.0)
+Obtendo informações de estados do PROCESSO 2: [ 0, 1, 0, 0, 0 ]
+Vetor de estados PROCESSO 1: [ 0+, 0 , 0*, 0+, 0+ ]
+---------------------------------------------------------------
+Processo 2: TESTOU PROCESSO 3 - CORRETO (tempo 180.0)
+Obtendo informações de estados do PROCESSO 3: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 2: [ 0+, 0+, 0 , 0*, 0+ ]
+---------------------------------------------------------------
+Processo 3: TESTOU PROCESSO 4 - CORRETO (tempo 180.0)
+Obtendo informações de estados do PROCESSO 4: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 3: [ 0+, 0+, 0+, 0 , 0* ]
+---------------------------------------------------------------
+Processo 4: TESTOU PROCESSO 0 - CORRETO (tempo 180.0)
+Obtendo informações de estados do PROCESSO 0: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 4: [ 0*, 0+, 0+, 0+, 0  ]
+---------------------------------------------------------------
+Processo 0: TESTOU PROCESSO 1 - CORRETO (tempo 210.0)
+Obtendo informações de estados do PROCESSO 1: [ 0, 0, 0, 0, 0 ]
+Vetor de estados PROCESSO 0: [ 0 , 0*, 0+, 0+, 0+ ]
+---------------------------------------------------------------

@@ -1,0 +1,42 @@
+===============================================================
+Universidade Federal do Paraná - UFPR
+Programa de Pós-Graduação em Informática - PPGInf
+Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+Trabalho Prático 0 - Tarefa 0
+- Digitar, compilar e executar o programa exemplo, tempo0.c
+
+Configuração da simulação:
+- Número de processos:  5
+- Tempo total de simulação: 150
+- Processo 1 sofre falha no tempo 31
+- Processo 1 se recupera da falha no tempo 61
+===============================================================
+Processo 0: TESTANDO (tempo 30.0)
+Processo 1: TESTANDO (tempo 30.0)
+Processo 2: TESTANDO (tempo 30.0)
+Processo 3: TESTANDO (tempo 30.0)
+Processo 4: TESTANDO (tempo 30.0)
+Processo 1: SOFREU FALHA (tempo 31.0)
+Processo 0: TESTANDO (tempo 60.0)
+Processo 1: FALHO, nao pode testar (tempo 60.0)
+Processo 2: TESTANDO (tempo 60.0)
+Processo 3: TESTANDO (tempo 60.0)
+Processo 4: TESTANDO (tempo 60.0)
+Processo 1: RECUPERADO DA FALHA (tempo 61.0)
+Processo 1: TESTANDO (tempo 62.0)
+Processo 0: TESTANDO (tempo 90.0)
+Processo 2: TESTANDO (tempo 90.0)
+Processo 3: TESTANDO (tempo 90.0)
+Processo 4: TESTANDO (tempo 90.0)
+Processo 1: TESTANDO (tempo 92.0)
+Processo 0: TESTANDO (tempo 120.0)
+Processo 2: TESTANDO (tempo 120.0)
+Processo 3: TESTANDO (tempo 120.0)
+Processo 4: TESTANDO (tempo 120.0)
+Processo 1: TESTANDO (tempo 122.0)
+Processo 0: TESTANDO (tempo 150.0)
+Processo 2: TESTANDO (tempo 150.0)
+Processo 3: TESTANDO (tempo 150.0)
+Processo 4: TESTANDO (tempo 150.0)
+Processo 1: TESTANDO (tempo 152.0)
