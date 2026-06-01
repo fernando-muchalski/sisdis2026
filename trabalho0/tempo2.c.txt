@@ -5,7 +5,7 @@
 
     Programa: tempo2.c
     Autor: Fernando José Muchalski
-    Data: 05/2026
+    Data de atualização: 26/05/2026
     
     Objetivo: 
     Fazer cada processo correto executar testes até achar outro processo correto.

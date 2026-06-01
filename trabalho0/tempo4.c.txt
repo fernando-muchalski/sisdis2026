@@ -5,7 +5,7 @@
 
     Programa: tempo4.c
     Autor: Fernando José Muchalski
-    Data: 05/2026
+    Data de atualização: 26/05/2026
 
     Objetivo:
     Fazer com que um processo correto, ao testar outro processo correto, obtenha dele as informações de estado dos demais processos

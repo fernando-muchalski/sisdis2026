@@ -11,7 +11,16 @@
     Implementar o algoritmo aleatorizado para eleição de líder (Randomized Leader Election Algorithm) baseado no anel (VRing)..
 
     Resumo:
-
+    O programa inicializa os N processos e determina inicialmente que todos os processos são candidatos à liderança, essa "Rodada 0"
+    garante que ao entrar no loop principal do simulador, os processos do anel iniciem a eleição do líder com o sorteio de bits 
+    aleatorios e envio de mensagens de eleição para o próximo processo na ordem circular,
+    O progresso se dá em rodadas, uma rodada é encerrada quando todos os bits foram recebidos por um processo.
+    Ao final de cada rodada, o processo verifica quantos candidatos à liderança foram encontrados no vetor de bits
+    Se for encontrado apenas um candidato à liderança, esse processo é eleito como líder e a eleição do líder é encerrada
+    Se for encontrado mais de um candidato à liderança, o processo inicia uma nova rodada de eleição do líder, gerando um novo número 
+    aleatório para os processos que estavam com o bit 1.
+    Caso seja encontrado nenhum candidato à liderança, o processo restaura o vetor de bits da rodada anterior e inicia uma nova 
+    rodada de eleição do líder, para tentar novamente a eleição do líder na próxima rodada.
 */
 
 #include <stdio.h>

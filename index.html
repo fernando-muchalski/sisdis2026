@@ -276,14 +276,85 @@ typedef struct
         <h2 id = "randomized">Algoritmo 2 (Randomized)</h2>
         <h3>Descrição e Funcionamento do Algoritmo</h3>
         <p>
-            O algoritmo opera em rodadas. Em cada rodada, processos geram
-            bits aleatórios e apenas os com bit = 1 tornam-se candidatos. Essas candidaturas circulam no anel e as
-            rodadas continuam até que um único processo seja eleito líder.
+            O <strong>Randomized Leader Election Algorithm</strong> é um algoritmo probabilístico de eleição de líder que funciona em <strong>rodadas</strong>. Diferentemente do algoritmo de Chang-Roberts, que elimina iterativamente candidatos menores, o algoritmo aleatorizado permite que cada processo tome decisões independentes em cada rodada por meio de sorteios aleatórios.
+        </p>
+        <p>
+            Em cada rodada, todos os processos candidatos geram um <strong>bit aleatório</strong> (0 ou 1). Apenas os processos que sorteiam bit = 1 permanecem como candidatos para a próxima rodada. Essas informações circulam no anel, e o algoritmo continua até que apenas um processo se declare como líder.
+        </p>
+        <p>
+            Na simulação implementada, cada processo mantém estruturas de dados para rastrear seus bits em cada rodada:
+        </p>
+        <pre>
+typedef struct
+{
+    int id;            // Identificador de facility do SMPL
+    int rodada;        // Número da rodada atual de eleição
+    int recebidos;     // Contador de bits recebidos na rodada
+    int lider;         // Identificador do processo eleito como líder
+    int *bit;          // Vetor de bits da rodada atual (1 = candidato, 0 = descartado)
+    int *bit_ant;      // Vetor de bits da rodada anterior (para restauração em caso de impasse)
+} TipoProcesso;
+        </pre>
+        <p>
+            Ao iniciar o programa, o usuário fornece o número total de processos (N) via linha de comando. Todos os processos começam com seus bits inicializados para 1, indicando que todos são candidatos na "Rodada 0". Uma mensagem de eleição é enfileirada para cada processo e agendada para iniciar a eleição no tempo 1.0.
+        </p>
+        <p>
+            No loop principal da simulação, ao receber um evento <code>election</code>, o processo recebe a mensagem enfileirada e processa o bit do processo contido nela. O processo incrementa seu contador de mensagens recebidas. Quando todos os bits da rodada forem recebidos (contador = N), o processo executa as seguintes verificações:
+        </p>
+        <ol>
+            <li><strong>Um único candidato (1 bit = 1):</strong> O processo identifica esse candidato como líder e encerra a eleição, informando o número de mensagens trocadas, descartadas e o tempo total de eleição.</li><br>
+            <li><strong>Nenhum candidato (todos bits = 0):</strong> Restaura o vetor de bits da rodada anterior e decrementa o contador de rodada para tentar novamente.</li><br>
+            <li><strong>Múltiplos candidatos:</strong> Inicia uma nova rodada. Os processos com bit = 1 geram novo número aleatório; os com bit = 0 descardam mensagens e não participam mais da eleição.</li>
+        </ol>
+        <p>
+            A vantagem do algoritmo aleatorizado é que ele não requer conhecimento de topologia nem ordenação total de identificadores. Contudo, sua eficiência depende da qualidade da geração de números aleatórios e pode exigir múltiplas rodadas em cenários com muitos candidatos.
         </p>
         <h3>Considerações</h3>
-        <p></p>
-        
+        <p>
+            O código usa uma estrutura de <strong>fila de mensagens</strong> para cada processo, de forma similar ao algoritmo de Chang-Roberts. A função <code>encaminharCandidato()</code> insere uma mensagem de eleição na fila do processo destino, enquanto <code>receberCandidato()</code> remove e processa a primeira mensagem pendente.
+        </p>
+        <p>
+            A aleatoriedade é controlada pela função <code>rand() % 2</code>, que gera 0 ou 1 com probabilidade teórica de 50% cada. Isso garante que, com alta probabilidade, o número de candidatos diminua exponencialmente a cada rodada, levando a convergência rápida para um único líder em N processos (em média O(log N) rodadas).
+        </p>
+        <p>
+            O programa também monitora o número de mensagens transmitidas e descartadas, permitindo análise comparativa com o algoritmo de Chang-Roberts. Além disso, o tempo de simulação (tempo SMPL) é registrado, oferecendo medidas de desempenho em diferentes configurações de N.
+        </p>
         <h3>Logs e explicações</h3>
+        <p>
+            O código-fonte da implementação do algoritmo aleatorizado está disponível em: <a href="trabalho1/randomized.c.txt"
+                target="_blank">randomized.c</a>. 
+        </p>
+        <p>
+            Foram realizadas execuções com diferentes quantidades de processos para avaliar o comportamento do algoritmo. Os logs correspondentes a cada teste estão listados abaixo:
+        </p>
+        <ul>
+            <li><a href="trabalho1/random-3.log.txt" target="_blank">random-3.log.txt</a> — execução com 3 processos. <pre>$ ./randomized 3</pre></li>
+            <li><a href="trabalho1/random-7.log.txt" target="_blank">random-7.log.txt</a> — execução com 7 processos. <pre>$ ./randomized 7</pre></li>
+            <li><a href="trabalho1/random-10.log.txt" target="_blank">random-10.log.txt</a> — execução com 10 processos. <pre>$ ./randomized 10</pre></li>
+        </ul>
+        <p>
+            Os logs apresentam a dinâmica da eleição em rodadas, mostrando os bits sorteados em cada rodada, os candidatos remanescentes, as mensagens circulando no anel e o processo eleito como líder. Ao final de cada execução, são registrados: o processo líder eleito, o número de mensagens trocadas e descartadas, o número de rodadas e o tempo total de simulação (SMPL) para cada cenário.
+        </p>
+        <p>
+            Esses resultados permitem comparar a eficiência do algoritmo aleatorizado com o Chang-Roberts em termos de número de mensagens, rodadas necessárias e tempo de convergência.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Considerações Finais</h2>
+        <p>
+            Este trabalho prático demonstrou a implementação de algoritmos fundamentais de computação distribuída utilizando o simulador SMPL. A progressão do <strong>Trabalho Prático 0</strong> para o <strong>Trabalho Prático 1</strong> refletiu o aprendizado gradativo de conceitos essenciais: desde testes de falhas e monitoramento de processos até algoritmos complexos de eleição de líder em topologia de anel (vRing).
+        </p>
+        <p>
+            O estudo dos algoritmos de <strong>Chang-Roberts</strong> e <strong>Randomized Leader Election</strong> evidenciou diferentes abordagens para o problema de eleição de lider. Enquanto o primeiro utiliza determinismo e ordenação de identificadores, o segundo aproveita a aleatoriedade. Ambas as abordagens possuem vantagens e limitações que dependem do contexto de aplicação.
+        </p>
+        <p>
+            Os resultados obtidos através das simulações permitirão medir e comparar métricas como número de mensagens trocadas, tempo de convergência e eficiência em diferentes configurações de quantidade de processos, oferecendo informações importantes sobre o comportamento de sistemas distribuídos.
+        </p>
+        <p>
+            O código-fonte completo deste projeto está disponível no repositório GitHub:
+            <br><strong><a href="https://github.com/fernando-muchalski/ufpr-sisdis-2026" target="_blank">https://github.com/fernando-muchalski/ufpr-sisdis-2026</a></strong>
+        </p>
     </div>
 
 </body>

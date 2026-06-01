@@ -5,7 +5,7 @@
 
     Programa: tempo3.c
     Autor: Fernando José Muchalski
-    Data: 05/2026
+    Data de atualização: 26/05/2026
     
     Objetivo: 
     Fazer cada processo manter localmente o vetor State[N], onde State[j] é o estado do processo j, 

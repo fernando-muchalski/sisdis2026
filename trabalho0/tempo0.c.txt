@@ -5,7 +5,7 @@
 
     Programa: tempo0.c
     Autor: Fernando José Muchalski
-    Data: 05/2026
+    Data de atualização: 26/05/2026
     
     Objetivo: 
     Introduzir a programação de algoritmos distribuídos utilizando a biblioteca de simulação SMPL.

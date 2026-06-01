@@ -11,7 +11,12 @@
     Implementar o algoritmo de eleição de líder com candidatos baseado em Chang-Roberts no anel (VRing)..
 
     Resumo:
-
+    O programa inicializa os N processos e determina aleatoriamente os processos candidatos à liderança.
+    Cada processo candidato inicia a eleição do lider enviando uma mensagem para o próprio processo, com identificador -1
+    No loop principal do simulado, ao receber o evento de eleição do lider, caso o processo não esteja falho,
+    ele verifica a mensagem de eleição recebida com o candidato a liderança.
+    O candidado é comparado com o lider local do processo, que é atualizado caso o candidato tenha id maior.
+    Sendo o mesmo ID, o processo já circulou todo anel e o lider foi eleito. 
 */
 
 #include <stdio.h>
