@@ -172,20 +172,18 @@
             eleição de líder em anel e os respectivos logs de execução.
         </p>
         <p>
-            O primeiro algoritmo é baseado na versão de <em>Chang-Roberts</em>, em que candidatos enviam suas
-            identificações ao longo do anel e o maior identificador se torna líder.
+            O primeiro algoritmo é baseado na versão de <a href="#chang"><strong>Chang-Roberts</strong></a>, em que candidatos enviam suas identificações ao longo do anel e o maior identificador se torna líder.
         </p>
         <p>
-            O segundo é um algoritmo aleatorizado de eleição em rodadas, onde processos sorteiam bits e apenas
-            candidatos continuam competindo até haver um único líder.
+            O segundo é um algoritmo aleatorizado de eleição em rodadas <a href="#randomized"><strong>(Randomized Leader Election Algorithm)</strong></a>, onde processos sorteiam bits aleatórios e aqueles com bit 1 se tornam candidatos e continuam competindo, até haver um único líder.
         </p>
     </div>
 
     <div class="section">
-        <h2>Algoritmo 1 (Chang-Roberts)</h2>
-        <h3>Descrição e Funcionamento do Algortimo</h3>
+        <h2 id = "chang">Algoritmo 1 (Chang-Roberts)</h2>
+        <h3>Descrição e Funcionamento do Algoritmo</h3>
         <p>
-            O algoritmo de Chang-Roberts é um algoritmo de eleição de líder para sistemas distribuídos organizados
+            O algoritmo de <strong>Chang-Roberts</strong> é um algoritmo de eleição de líder para sistemas distribuídos organizados
             logicamente em anel. Nesse modelo, cada processo conhece o seu sucessor no anel e as mensagens circulam em
             uma única direção. O objetivo é escolher como líder o processo com maior identificador entre os processos
             candidatos participantes da eleição.
@@ -255,8 +253,8 @@ typedef struct
         </p>
         <h3>Logs e explicações</h3>
         <p>
-            O código de referência para o algoritmo Chang-Roberts está em: <a href="trabalho1/chang-roberts.c.txt"
-                target="_blank">trabalho1/chang-roberts.c</a>. 
+            O código-fonte da implementação do algoritmo Chang-Roberts está disponível em: <a href="trabalho1/chang-roberts.c.txt"
+                target="_blank">chang-roberts.c</a>. 
         </p>
         <p>
             Nessa simualação foram realizados três testes principais, com diferentes configurações de candidatos, para avaliar o comportamento do algoritmo em cada cenário. Os logs correspondentes a cada teste estão listados abaixo:
@@ -275,33 +273,17 @@ typedef struct
     </div>
 
     <div class="section">
-        <h3>Descrição geral dos algoritmos</h3>
+        <h2 id = "randomized">Algoritmo 2 (Randomized)</h2>
+        <h3>Descrição e Funcionamento do Algoritmo</h3>
         <p>
-            <strong>Algoritmo 1 (Chang-Roberts):</strong> cada candidato envia seu identificador ao processo seguinte no
-            anel. Mensagens com identificador maior substituem o valor local de liderança e são repassadas. Quando uma
-            mensagem retorna ao remetente original, esse processo é reconhecido como líder.
-        </p>
-        <p>
-            <strong>Algoritmo 2 (aleatorizado):</strong> o algoritmo opera em rodadas. Em cada rodada, processos geram
+            O algoritmo opera em rodadas. Em cada rodada, processos geram
             bits aleatórios e apenas os com bit = 1 tornam-se candidatos. Essas candidaturas circulam no anel e as
             rodadas continuam até que um único processo seja eleito líder.
         </p>
+        <h3>Considerações</h3>
+        <p></p>
+        
         <h3>Logs e explicações</h3>
-        <p>
-            O código de referência para o algoritmo Chang-Roberts está em <a href="trabalho1/chang-roberts.c.txt"
-                target="_blank">trabalho1/chang-roberts.c.txt</a>.
-        </p>
-        <ul>
-            <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 1 candidato.</li>
-            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com todos os
-                processos como candidatos.</li>
-            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução aleatorizada
-                com candidatos sorteados.</li>
-        </ul>
-        <p>
-            Os logs devem ser usados para descrever o líder eleito, o número de mensagens trocadas e o tempo de
-            simulação em cada caso.
-        </p>
     </div>
 
 </body>

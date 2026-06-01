@@ -1,0 +1,312 @@
+===============================================================
+Universidade Federal do Paraná - UFPR
+Programa de Pós-Graduação em Informática - PPGInf
+Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+Trabalho Prático 1 - Algoritmo 2
+- Implementar o algoritmo de eleição de lider (Randomized Leader Election Algorithm)
+  baseado no anel (VRing). 
+
+Configuração da simulação:
+- Número de processos:  3
+- Tempo total de simulação: 180
+===============================================================
+Processo 0: RECEBEU BIT (1) DO PROCESSO 0 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 3
+  - Bits do processo 0: [1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 0 ATUAL: [1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 1 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 3
+  - Bits do processo 1: [1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 2 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 3
+  - Bits do processo 2: [1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 2 ATUAL: [1, 1, 1]
+  - Envia bit (1) do processo 2 para o processo  0
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 0 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 1: [1, 0, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 2: [1, 1, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 2 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 0: [1, 1, 1]
+
+  - Bits do processo 0 ATUAL: [1, 1, 1]
+  - Envia bit (1) do processo 2 para o processo  1
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 0 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 2: [1, 0, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 0: [1, 1, 1]
+
+  - Bits do processo 0 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 2 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 1: [1, 0, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 2 para o processo  2
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 0 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 0: [1, 0, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 0 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 1: [1, 0, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 2 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 2: [1, 0, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 2 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 2 para o processo  0
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 0 (tempo  5.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 1: [1, 0, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo  5.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 2: [1, 0, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 2 (tempo  5.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 0: [1, 0, 1]
+
+  - Bits do processo 0 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 2 para o processo  1
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 0 (tempo  6.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 2: [1, 0, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo  6.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 0: [1, 0, 1]
+
+  - Bits do processo 0 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 2 (tempo  6.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 1: [1, 0, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 2 para o processo  2
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 0 (tempo  7.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 0: [1, 0, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 0 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo  7.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 1: [1, 0, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 2 (tempo  7.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 2: [1, 0, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 2 ATUAL: [1, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  0
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 0 (tempo  8.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 1: [1, 0, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1]
+  - Envia bit (1) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo  8.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 2: [1, 0, 0]
+
+  - Bits do processo 2 ATUAL: [1, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 2 (tempo  8.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 0: [1, 0, 1]
+
+  - Bits do processo 0 ATUAL: [1, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  1
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 0 (tempo  9.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 2: [1, 0, 0]
+
+  - Bits do processo 2 ATUAL: [1, 0, 0]
+  - Envia bit (1) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo  9.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 0: [1, 0, 0]
+
+  - Bits do processo 0 ATUAL: [1, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 2 (tempo  9.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 1: [1, 0, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  2
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 0 (tempo 10.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 0: [1, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 0
+Mensagens transmitidas: 27
+Mensagens descartadas.: 0
+Tempo Eleicao..: 11.0
+===============================================
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo 10.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 1: [1, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 0
+Mensagens transmitidas: 27
+Mensagens descartadas.: 0
+Tempo Eleicao..: 11.0
+===============================================
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 2 (tempo 10.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 2: [1, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 0
+Mensagens transmitidas: 27
+Mensagens descartadas.: 0
+Tempo Eleicao..: 11.0
+===============================================
+

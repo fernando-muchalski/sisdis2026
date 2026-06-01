@@ -1,0 +1,2659 @@
+===============================================================
+Universidade Federal do Paraná - UFPR
+Programa de Pós-Graduação em Informática - PPGInf
+Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+Trabalho Prático 1 - Algoritmo 2
+- Implementar o algoritmo de eleição de lider (Randomized Leader Election Algorithm)
+  baseado no anel (VRing). 
+
+Configuração da simulação:
+- Número de processos:  7
+- Tempo total de simulação: 180
+===============================================================
+Processo 0: RECEBEU BIT (1) DO PROCESSO 0 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 0 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 1 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 1: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 2 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 2: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 2 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 2 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 3 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 3: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 3 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 3 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 4 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 4: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 4 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 4 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 5 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 5: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 5 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 5 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 6 (tempo  1.0)
+  - Rodada: 0
+  - Bits recebidos: 7
+  - Bits do processo 6: [1, 1, 1, 1, 1, 1, 1]
+
+  - Recebeu todos os bits da rodada
+  - Restam 7 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 6 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  0
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 0 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 2: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (0) do processo 1 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 2 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 3: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 3 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 2 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 3 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 4: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 4 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 3 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 4 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 5: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 5 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 4 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 5 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 6: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 6 (tempo  2.0)
+  - Rodada: 1
+  - Bits recebidos: 1
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 0 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  1
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 0 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 1 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 3: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (0) do processo 1 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 2 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 4: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 4 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 2 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 3 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 5: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 5 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 3 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 4 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 6: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 4 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 5 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 6 (tempo  3.0)
+  - Rodada: 1
+  - Bits recebidos: 2
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  2
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 0 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 1 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 4: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (0) do processo 1 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 2 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 5: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 5 ATUAL: [1, 1, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 2 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 3 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 6: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 4 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 4 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 5 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 6 (tempo  4.0)
+  - Rodada: 1
+  - Bits recebidos: 3
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  3
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 0 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 4: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 1 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 5: [1, 1, 1, 1, 1, 1, 1]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (0) do processo 1 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 2 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 6: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 3 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 4 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 4 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 5 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 6 (tempo  5.0)
+  - Rodada: 1
+  - Bits recebidos: 4
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  4
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 0 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 5: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 1, 1, 1]
+  - Envia bit (1) do processo 0 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 1 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 6: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 2 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [1, 1, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 3 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 4 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 4 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 5 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 6 (tempo  6.0)
+  - Rodada: 1
+  - Bits recebidos: 5
+  - Bits do processo 4: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  5
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 0 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 6: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 0: [1, 1, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 2 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 3 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 4 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 4 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 5 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 4: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 6 (tempo  7.0)
+  - Rodada: 1
+  - Bits recebidos: 6
+  - Bits do processo 5: [1, 0, 1, 1, 1, 1, 1]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  6
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 0 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 0: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 2 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 3 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 4 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 4: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 5 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 5: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 6 (tempo  8.0)
+  - Rodada: 1
+  - Bits recebidos: 7
+  - Bits do processo 6: [1, 0, 1, 1, 1, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 5 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 6 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  0
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 0 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 1: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 2 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 3 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 4: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 4 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 5: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 5 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 6: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 6 (tempo  9.0)
+  - Rodada: 2
+  - Bits recebidos: 1
+  - Bits do processo 0: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  1
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 0 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 2: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 1 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [1, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 2 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 4: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 3 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 5: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 4 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 6: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 5 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 0: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 6 (tempo 10.0)
+  - Rodada: 2
+  - Bits recebidos: 2
+  - Bits do processo 1: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  2
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 0 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 3: [1, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 1 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 4: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 2 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 5: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 3 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 6: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 4 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 0: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 5 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 1: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 6 (tempo 11.0)
+  - Rodada: 2
+  - Bits recebidos: 3
+  - Bits do processo 2: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  3
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 0 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 4: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 1 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 5: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 2 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 6: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 3 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 4 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 1: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 5 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 2: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 6 (tempo 12.0)
+  - Rodada: 2
+  - Bits recebidos: 4
+  - Bits do processo 3: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  4
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 0 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 5: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 1 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 6: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [1, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 2 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 3 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 4 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 2: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 5 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 3: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 1, 1, 1, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 6 (tempo 13.0)
+  - Rodada: 2
+  - Bits recebidos: 5
+  - Bits do processo 4: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  5
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 0 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 6: [1, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 2 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 2 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 3 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 2: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 4 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 3: [0, 0, 1, 1, 1, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 5 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 4: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 6 (tempo 14.0)
+  - Rodada: 2
+  - Bits recebidos: 6
+  - Bits do processo 5: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  6
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 0 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 0 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 2 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 2: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 3 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 3: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 3 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 4 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 4: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 4 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 4 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 5 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 5: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (1)
+  - Bits do processo 5 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 6 (tempo 15.0)
+  - Rodada: 2
+  - Bits recebidos: 7
+  - Bits do processo 6: [0, 0, 1, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 3 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 6 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 6 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  0
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 0 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 2 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 3: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 3 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 4: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 4 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 5: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 5 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 6: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 6 (tempo 16.0)
+  - Rodada: 3
+  - Bits recebidos: 1
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  1
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 0 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 1 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 3: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 2 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 4: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 3 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 5: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 4 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 6: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 5 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 6 (tempo 17.0)
+  - Rodada: 3
+  - Bits recebidos: 2
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  2
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 0 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 3: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 1 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 2 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 5: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 3 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 6: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 4 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 5 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 6 (tempo 18.0)
+  - Rodada: 3
+  - Bits recebidos: 3
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  3
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 0 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 1 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 5: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 2 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 6: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 3 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 4 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 5 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 6 (tempo 19.0)
+  - Rodada: 3
+  - Bits recebidos: 4
+  - Bits do processo 3: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  4
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 0 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 5: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 1 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 2 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 0: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 3 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 1, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 4 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 5 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 3: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 6 (tempo 20.0)
+  - Rodada: 3
+  - Bits recebidos: 5
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  5
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 0 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 2 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 1: [0, 0, 1, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 3 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 3 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 4 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 3: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 5 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 6 (tempo 21.0)
+  - Rodada: 3
+  - Bits recebidos: 6
+  - Bits do processo 5: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  6
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 0 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 0 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 2 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 2 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 3 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 3: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 4 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 4 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  5
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 5 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 5: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  - Gerado novo bit (0)
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 6 (tempo 22.0)
+  - Rodada: 3
+  - Bits recebidos: 7
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 2 candidatos à liderança
+  - Iniciando nova rodada 
+  BIT ANTERIOR DO PROCESSO 6 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  0
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 0 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 2 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 3 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 4 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 5: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 5 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 6 (tempo 23.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  1
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 0 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 1 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 2 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 3 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 5: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 4 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 6: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 5 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 6 (tempo 24.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  2
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 0 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 1 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 2 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 3 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 6: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 4 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 0: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 5 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 6 (tempo 25.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  3
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 0 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 1 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 2 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 3 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 0: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 4 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 1: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 5 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 6 (tempo 26.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  4
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 0 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 0 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 1 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 2 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 0: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 3 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 1: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 4 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 2: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 5 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 6 (tempo 27.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  5
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 0 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 0: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 2 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 1: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 3 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 2: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 4 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 3: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 5 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 6 (tempo 28.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 6 para o processo  6
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 0 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 0: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 0 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 1: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 2 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 2: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 2 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 3 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 3: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  - Gerado novo bit (0)
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 4 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 4: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 4 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 5 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  - Gerado novo bit (0)
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 6 (tempo 29.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 6 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  0
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 0 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 2 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 3 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 4 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 5: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 5 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 6 (tempo 30.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  1
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 0 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 1 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 2 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 3 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 5: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 4 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 6: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 5 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 6 (tempo 31.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  2
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 0 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 1 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 2 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 3 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 6: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 4 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 0: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 5 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 6 (tempo 32.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  3
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 0 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 1 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 2 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 3 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 0: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 4 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 1: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 5 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 6 (tempo 33.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  4
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 0 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 0 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 1 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 2 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 0: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 3 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 1: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 4 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 2: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 5 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 6 (tempo 34.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  5
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 0 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 0: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 2 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 1: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 2 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 3 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 2: [0, 0, 0, 1, 0, 0, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 3 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 4 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 3: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 4 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 5 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 5 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 6 (tempo 35.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 0, 0]
+  - Envia bit (0) do processo 6 para o processo  6
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 0 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 0: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 0 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 1: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 1 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 2 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 2: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 2 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 3 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 3: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  - Gerado novo bit (0)
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 4 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 4: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 4 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 4 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 5 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 5: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  - Gerado novo bit (1)
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 6 (tempo 36.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 6: [0, 0, 0, 0, 0, 0, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 0 candidatos à liderança
+  NENHUM CANDIDATO ENCONTRADO NA RODADA - RESTAURANDO ESTADO ANTERIOR!
+  BIT ANTERIOR DO PROCESSO 6 ERA 0, DESCARTA MENSAGENS
+  - Gerado novo bit (0)
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  0
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 0 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 1 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 2 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 3 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 4: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 4 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 5: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  6
+
+Processo 6: RECEBEU BIT (1) DO PROCESSO 5 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 6 (tempo 37.0)
+  - Rodada: 4
+  - Bits recebidos: 1
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  1
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 0 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 1 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 2 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 3 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 5: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 4 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  0
+
+Processo 0: RECEBEU BIT (1) DO PROCESSO 5 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 6 (tempo 38.0)
+  - Rodada: 4
+  - Bits recebidos: 2
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  2
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 0 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 1 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 2 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 5: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 3 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 6: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 4 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  1
+
+Processo 1: RECEBEU BIT (1) DO PROCESSO 5 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 6 (tempo 39.0)
+  - Rodada: 4
+  - Bits recebidos: 3
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  3
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 0 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 1 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 5: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 2 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 6: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 3 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 0: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 4 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  2
+
+Processo 2: RECEBEU BIT (1) DO PROCESSO 5 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 6 (tempo 40.0)
+  - Rodada: 4
+  - Bits recebidos: 4
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  4
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 0 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 5: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  6
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 1 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 6: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 2 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 0: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 3 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 1: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 4 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 1, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  3
+
+Processo 3: RECEBEU BIT (1) DO PROCESSO 5 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  4
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 6 (tempo 41.0)
+  - Rodada: 4
+  - Bits recebidos: 5
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  5
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 0 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 6: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 6 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 0 para o processo  0
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 1 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 0: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 0 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 1 para o processo  1
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 2 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 1: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 1 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 2 para o processo  2
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 3 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 2: [0, 0, 0, 1, 0, 1, 0]
+
+  - Bits do processo 2 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 3 para o processo  3
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 4 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 3 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 4 para o processo  4
+
+Processo 4: RECEBEU BIT (1) DO PROCESSO 5 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 4 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (1) do processo 5 para o processo  5
+
+Processo 5: RECEBEU BIT (0) DO PROCESSO 6 (tempo 42.0)
+  - Rodada: 4
+  - Bits recebidos: 6
+  - Bits do processo 5: [0, 0, 0, 0, 0, 1, 0]
+
+  - Bits do processo 5 ATUAL: [0, 0, 0, 0, 0, 1, 0]
+  - Envia bit (0) do processo 6 para o processo  6
+
+Processo 0: RECEBEU BIT (0) DO PROCESSO 0 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 0: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
+Processo 1: RECEBEU BIT (0) DO PROCESSO 1 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 1: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
+Processo 2: RECEBEU BIT (0) DO PROCESSO 2 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 2: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
+Processo 3: RECEBEU BIT (0) DO PROCESSO 3 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 3: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
+Processo 4: RECEBEU BIT (0) DO PROCESSO 4 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 4: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
+Processo 5: RECEBEU BIT (1) DO PROCESSO 5 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 5: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
+Processo 6: RECEBEU BIT (0) DO PROCESSO 6 (tempo 43.0)
+  - Rodada: 4
+  - Bits recebidos: 7
+  - Bits do processo 6: [0, 0, 0, 0, 0, 1, 0]
+
+  - Recebeu todos os bits da rodada
+  - Restam 1 candidatos à liderança
+
+===============================================
+Lider Eleito...: 5
+Mensagens transmitidas: 294
+Mensagens descartadas.: 0
+Tempo Eleicao..: 44.0
+===============================================
+
