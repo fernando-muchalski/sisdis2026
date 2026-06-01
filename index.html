@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Trabalho - Sistemas Distribuídos</title>
@@ -9,60 +10,78 @@
             margin: 40px;
             background-color: #f5f5f5;
         }
-        h1, h2 {
+
+        h1,
+        h2 {
             color: #2c3e50;
         }
+
         .header-section {
             background: #ffffff;
             padding: 18px 24px;
             margin-bottom: 20px;
             border-radius: 10px;
             border: 1px solid #dcdcdc;
-            box-shadow: 0 0 8px rgba(0,0,0,0.06);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
         }
+
         .header-section p {
             margin: 6px 0;
             line-height: 1.5;
             color: #333;
         }
+
         .section {
             background: white;
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+
         a {
             color: #2980b9;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         pre {
             background: #eee;
             padding: 10px;
             overflow-x: auto;
         }
+
         .task-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 16px;
         }
+
         .task-table th,
         .task-table td {
             border: 1px solid #dcdcdc;
             padding: 12px 10px;
             text-align: left;
         }
+
+        .task-table th:first-child,
+        .task-table td:first-child {
+            white-space: nowrap;
+        }
+
         .task-table th {
             background: #f0f4f8;
         }
+
         .task-table tr:nth-child(even) {
             background: #fafafa;
         }
     </style>
 </head>
+
 <body>
 
     <div class="header-section">
@@ -77,20 +96,27 @@
         <h2>Trabalho Prático 0</h2>
         <h3>Roteiro de Aprendizado Prático de Simulação</h3>
         <p>
-            Esta seção apresenta o desenvolvimento do <u>Trabalho Prático 0</u>, cujo objetivo foi proporcionar o aprendizado inicial da ferramenta de simulação SMPL, empregada na modelagem e análise de sistemas distribuídos. 
+            Esta seção apresenta o desenvolvimento do <u>Trabalho Prático 0</u>, cujo objetivo foi proporcionar o
+            aprendizado inicial da ferramenta de simulação SMPL, empregada na modelagem e análise de sistemas
+            distribuídos.
         </p>
         <p>
-            Ao longo das atividades, os programas desenvolvidos evoluiram gradativamente em complexidade, iniciando com a execução de um exemplo básico e avançando para implementações relacionadas a testes de falhas, monitoramento de processos e manutenção de informações de estado em um sistema organizado em anel. 
+            Ao longo das atividades, os programas desenvolvidos evoluiram gradativamente em complexidade, iniciando com
+            a execução de um exemplo básico e avançando para implementações relacionadas a testes de falhas,
+            monitoramento de processos e manutenção de informações de estado em um sistema organizado em anel.
         </p>
         <p>
-            As tarefas foram estruturadas de forma incremental, permitindo a compreensão dos conceitos de tolerância a falhas e disseminação de informações entre processos. Como resultado final, a última atividade correspondeu à implementação do algoritmo vRing.
+            As tarefas foram estruturadas de forma incremental, permitindo a compreensão dos conceitos de tolerância a
+            falhas e disseminação de informações entre processos. Como resultado final, a última atividade correspondeu
+            à implementação do algoritmo vRing.
         </p>
 
     </div>
 
     <div class="section">
         <h2>Entregas (Trabalho Prático 0)</h2>
-        <p>A tabela abaixo reúne cada tarefa com uma descrição resumida e os links correspondentes para visualização do código-fonte e arquivo de LOG.</p>
+        <p>A tabela abaixo reúne cada tarefa com uma descrição resumida e os links correspondentes para visualização do
+            código-fonte e arquivo de LOG.</p>
         <table class="task-table">
             <thead>
                 <tr>
@@ -109,7 +135,8 @@
                 </tr>
                 <tr>
                     <td>Tarefa 1</td>
-                    <td>Fazer cada processo testar o seguinte no anel usando a função <em>status()</em> e imprimir resultado de cada teste.</td>
+                    <td>Fazer cada processo testar o seguinte no anel usando a função <em>status()</em> e imprimir
+                        resultado de cada teste.</td>
                     <td><a href="trabalho0/tempo1.c.txt" target="_blank">tempo1.c</a></td>
                     <td><a href="trabalho0/tempo1.log.txt" target="_blank">tempo1.log</a></td>
                 </tr>
@@ -121,13 +148,15 @@
                 </tr>
                 <tr>
                     <td>Tarefa 3</td>
-                    <td>Fazer cada processo manter localmente o vetor <code>State[N]</code> com os estados dos demais processos. Os possíveis valores para estado são -1 (unknown), 0 (correto) e 1 (falho).</td>
+                    <td>Fazer cada processo manter localmente o vetor <code>State[N]</code> com os estados dos demais
+                        processos. Os possíveis valores para estado são -1 (unknown), 0 (correto) e 1 (falho).</td>
                     <td><a href="trabalho0/tempo3.c.txt" target="_blank">tempo3.c</a></td>
                     <td><a href="trabalho0/tempo3.log.txt" target="_blank">tempo3.log</a></td>
                 </tr>
                 <tr>
                     <td>Tarefa 4</td>
-                    <td>Ao testar processo correto, obter dele as informações de estado dos demais processos. Essa tarefa simula o algoritmo vRing</td>
+                    <td>Ao testar processo correto, obter dele as informações de estado dos demais processos. Essa
+                        tarefa simula o algoritmo vRing</td>
                     <td><a href="trabalho0/tempo4.c.txt" target="_blank">tempo4.c</a></td>
                     <td><a href="trabalho0/tempo4.log.txt" target="_blank">tempo4.log</a></td>
                 </tr>
@@ -139,31 +168,142 @@
         <h2>Trabalho Prático 1</h2>
         <h3>Dois Algoritmos para Eleição Distribuída de Líder em Anel</h3>
         <p>
-            Nesta seção são apresentados os resultados do <strong>Trabalho Prático 1</strong>, com dois algoritmos de eleição de líder em anel e os logs de execução.
+            Nesta seção são apresentados os resultados do <strong>Trabalho Prático 1</strong>, com dois algoritmos de
+            eleição de líder em anel e os respectivos logs de execução.
         </p>
         <p>
-            O primeiro algoritmo é baseado na versão de <em>Chang-Roberts</em>, em que candidatos enviam suas identificações ao longo do anel e o maior identificador se torna líder. O segundo é um algoritmo aleatorizado de eleição em rodadas, onde processos sorteiam bits e apenas candidatos continuam competindo até haver um único líder.
-        </p>
-        <h3>Descrição geral dos algoritmos</h3>
-        <p>
-            <strong>Algoritmo 1 (Chang-Roberts):</strong> cada candidato envia seu identificador ao processo seguinte no anel. Mensagens com identificador maior substituem o valor local de liderança e são repassadas. Quando uma mensagem retorna ao remetente original, esse processo é reconhecido como líder.
+            O primeiro algoritmo é baseado na versão de <em>Chang-Roberts</em>, em que candidatos enviam suas
+            identificações ao longo do anel e o maior identificador se torna líder.
         </p>
         <p>
-            <strong>Algoritmo 2 (aleatorizado):</strong> o algoritmo opera em rodadas. Em cada rodada, processos geram bits aleatórios e apenas os com bit = 1 tornam-se candidatos. Essas candidaturas circulam no anel e as rodadas continuam até que um único processo seja eleito líder.
+            O segundo é um algoritmo aleatorizado de eleição em rodadas, onde processos sorteiam bits e apenas
+            candidatos continuam competindo até haver um único líder.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Algoritmo 1 (Chang-Roberts)</h2>
+        <h3>Descrição e Funcionamento do Algortimo</h3>
+        <p>
+            O algoritmo de Chang-Roberts é um algoritmo de eleição de líder para sistemas distribuídos organizados
+            logicamente em anel. Nesse modelo, cada processo conhece o seu sucessor no anel e as mensagens circulam em
+            uma única direção. O objetivo é escolher como líder o processo com maior identificador entre os processos
+            candidatos participantes da eleição.
+        </p>
+        <p>
+            Na simulação apresentada, cada processo é representado por uma estrutura que possui um identificador, uma
+            indicação de quem considera ser o líder e uma marcação que informa se ele é candidato à liderança.
+        </p>
+        <pre>
+typedef struct
+{
+    int id;            // Identificador de facility do SMPL
+    int lider;         // Variável para armazenar o identificador do processo lider
+    int sou_candidato; // Variável para indicar se o processo é um candidato à liderança (1) ou não (0)
+} TipoProcesso;
+            </pre>
+        <p>
+            Para iniciar a simulação, na chamada do programa via linha de comando o usuário deve informar o número total
+            de processos (N). Além disso, opcionalmente, é possível informar o número de processos que serão candidatos
+            a lider. Ao deixar de informar o número de candidatos, o programa calcula aleatoriamente a quantidade de
+            candidatos, garantindo que seja pelo menos 1 e no máximo N. Dessa forma, o programa proporciona flexibilidade
+            para testar diferentes cenários de eleição.
+        </p>
+        <p>
+            Ao iniciar o programa, um subconjunto de processos é escolhido como candidato, de acordo com a opção fornecida pelo usuário. Esses processos atualizam sua variável local <code>lider</code> para seu próprio identificador e
+            marcam-se como candidatos (<code>sou_candidato = 1</code>).
+        </p>
+        <p>
+            Em seguida, ocorre o escalonamento dos processos candidatos. Cada processo candidato agenda um evento de eleição para ocorrer na unidade de tempo 1.0, o que representa o início da eleição do líder no sistema.
+            Cada processo candidato envia uma mensagem com um identificador vazio (-1) ao próprio processo. Essa mensagem é usada para identificar o início da eleição do líder.   
+        </p>
+        <pre>
+        ...
+        if (processo[i].sou_candidato)
+        {
+            encaminharCandidato(cand_msg, i, -1); 
+            schedule(election, 1.0, i); // o processo candidato inicia a eleição do líder no tempo 1.0
+        }
+    </pre>
+        <p> 
+            No loop principal da simulação, ao receber um evento <code>election</code>, o processo executa a função <code>receberCandidato()</code>, que é responsável por processar as mensagens de eleição recebidas. Essa função retornará o identificador do candidato recebido.
+        </p>
+        <p>
+            Caso o identificador do candidado recebido seja -1, isso indica que o processo recebeu a mensagem de início da eleição, ou seja, a mensagem que ele mesmo enviou no início. Nesse caso, sendo o processo um candidato, ele se considera lider e envia a mensagem com o seu identificador para o próximo processo correto no anel, dando início à circulação das mensagens de eleição.
+        </p>    
+        <p>    
+            Por outro lado, caso o identificador recebido seja de um candidato válido, o processo compara esse identificador com o identificador do candidato a lider que conhece localmente. Podendo ocorrer as seguintes situações:
+        </p>
+        <ol>
+            <li>O candidato recebido é MAIOR que o lider local (<code>candidato > processo[i].lider</code>): o processo atualiza sua informação local e encaminha esse candidato adiante no anel</li><br>
+
+            <li>O candidato recebido é MENOR que o líder local (<code>candidato < processo[i].lider</code>): a mensagem é descartada, pois existe um candidato melhor circulando ou já conhecido. Dessa forma, candidatos com identificadores menores tendem a ser eliminados ao longo da circulação das mensagens</li><br>
+
+            <li>O candidato recebido é IGUAL ao líder local (<code>candidato == processo[i].lider</code>): nesse momento a eleição termina. Isso significa que sua mensagem percorreu o anel e não foi descartada por nenhum processo com identificador maior. Portanto, esse processo conclui que possui o maior identificador entre os candidatos participantes e se declara líder.</li>
+        </ol>
+            
+        <h3>Considerações</h3>
+        <p>                  
+            No código apresentado, a comunicação entre processos é simulada por filas de mensagens, uma para cada processo. A função <code>encaminharCandidato()</code> insere uma mensagem de eleição na fila do processo destino, enquanto <code>receberCandidato()</code> remove a primeira mensagem pendente da fila do processo que está executando o evento de
+            eleição. 
+        </p>
+        <p>
+            Como o SMPL é usado para escalonar eventos no tempo, para esse algoritmo foi criado um evento <code>election</code>, sinalizando que o processo de eleição está acontecedo. A simulação também prevê a existência de falhas e recuperações, mas esses eventos não são efetivamente escalonados no programa atual. Ainda assim, a lógica de eleição tenta ignorar processos falhos ao procurar o próximo processo correto no anel. Isso adapta o anel lógico para que a mensagem de eleição continue circulando apenas entre processos considerados corretos. 
+        </p>
+        <p>
+            No programa também foram agendados testes periódicos para verificar o estado do processo lider. Esses testes ocorrem a cada 10 unidades de tempo. Porém, como o programa é focado na eleição do líder, esses eventos de teste não são inicialmente escalonados. No entanto, em uma implementação futura, eles poderiam ser usados para implementar uma lógica de detecção de falhas do líder e iniciar uma nova eleição caso o líder falhasse durante a simulação.
         </p>
         <h3>Logs e explicações</h3>
         <p>
-            O código de referência para o algoritmo Chang-Roberts está em <a href="trabalho1/chang-roberts.c.txt" target="_blank">trabalho1/chang-roberts.c.txt</a>.
+            O código de referência para o algoritmo Chang-Roberts está em: <a href="trabalho1/chang-roberts.c.txt"
+                target="_blank">trabalho1/chang-roberts.c</a>. 
+        </p>
+        <p>
+            Nessa simualação foram realizados três testes principais, com diferentes configurações de candidatos, para avaliar o comportamento do algoritmo em cada cenário. Os logs correspondentes a cada teste estão listados abaixo:
+        </p>
+        <ul>
+            <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 10 processos e 1 candidato. <pre>$ ./chang-roberts 10 1</pre></li>
+            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com 10 processos todos os processos como candidatos. <pre>$ ./chang-roberts 10 10</pre></li>
+            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução com 10 processos e candidatos aleatórios. Nesse caso o programa sorteou aleatoriamente 4 processos. <pre>$ ./chang-roberts 10</pre>. </li>
+        </ul>
+        <p>
+            Os logs apresentam a dinâmica da eleição do líder, mostrando os candidatos participantes, as mensagens de eleição circulando no anel, as mensagens descartadas e o processo eleito como líder. Após eleito, são apresentados: o processo lider, o número de mensagens trocadas e descartadas e o tempo total de simulação para cada cenário. Ao final, também são apresentados o estado final de cada processo do anel, verificando se todos reconhecem o mesmo processo como lider.
+        </p>
+        <p>
+            Esses resultados permitem analisar a eficiência do algoritmo em diferentes condições de eleição.
+        </p>
+    </div>
+
+    <div class="section">
+        <h3>Descrição geral dos algoritmos</h3>
+        <p>
+            <strong>Algoritmo 1 (Chang-Roberts):</strong> cada candidato envia seu identificador ao processo seguinte no
+            anel. Mensagens com identificador maior substituem o valor local de liderança e são repassadas. Quando uma
+            mensagem retorna ao remetente original, esse processo é reconhecido como líder.
+        </p>
+        <p>
+            <strong>Algoritmo 2 (aleatorizado):</strong> o algoritmo opera em rodadas. Em cada rodada, processos geram
+            bits aleatórios e apenas os com bit = 1 tornam-se candidatos. Essas candidaturas circulam no anel e as
+            rodadas continuam até que um único processo seja eleito líder.
+        </p>
+        <h3>Logs e explicações</h3>
+        <p>
+            O código de referência para o algoritmo Chang-Roberts está em <a href="trabalho1/chang-roberts.c.txt"
+                target="_blank">trabalho1/chang-roberts.c.txt</a>.
         </p>
         <ul>
             <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 1 candidato.</li>
-            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com todos os processos como candidatos.</li>
-            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução aleatorizada com candidatos sorteados.</li>
+            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com todos os
+                processos como candidatos.</li>
+            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução aleatorizada
+                com candidatos sorteados.</li>
         </ul>
         <p>
-            Os logs devem ser usados para descrever o líder eleito, o número de mensagens trocadas e o tempo de simulação em cada caso.
+            Os logs devem ser usados para descrever o líder eleito, o número de mensagens trocadas e o tempo de
+            simulação em cada caso.
         </p>
     </div>
 
 </body>
+
 </html>
