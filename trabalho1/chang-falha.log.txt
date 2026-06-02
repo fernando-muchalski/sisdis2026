@@ -1,0 +1,143 @@
+===============================================================
+Universidade Federal do Paraná - UFPR
+Programa de Pós-Graduação em Informática - PPGInf
+Disciplina: Sistemas Distribuídos (Prof. Elias)
+
+Trabalho Prático 1 - Algoritmo 1
+- Implementar o algoritmo de eleição de lider com candidatos baseado
+  em Chang-Roberts no anel (VRing). 
+
+Configuração da simulação:
+- Número de processos:  5
+- Tempo total de simulação: 210
+- Número de candidatos à liderança: 4
+- Candidatos à liderança:
+	Processo (0)
+	Processo (1)
+	Processo (2)
+	Processo (3)
+===============================================================
+Processo 0: DEFINIDO COMO CANDIDATO (tempo  0.0)
+Processo 1: DEFINIDO COMO CANDIDATO (tempo  0.0)
+Processo 2: DEFINIDO COMO CANDIDATO (tempo  0.0)
+Processo 3: DEFINIDO COMO CANDIDATO (tempo  0.0)
+
+Processo 0: INICIANDO ELEICAO DO LIDER (tempo  1.0)
+Processo 0: ENVIA CANDIDATO (0) PARA O PROCESSO 1 (tempo  1.0)
+
+Processo 1: INICIANDO ELEICAO DO LIDER (tempo  1.0)
+Processo 1: ENVIA CANDIDATO (1) PARA O PROCESSO 2 (tempo  1.0)
+
+Processo 2: INICIANDO ELEICAO DO LIDER (tempo  1.0)
+Processo 2: ENVIA CANDIDATO (2) PARA O PROCESSO 3 (tempo  1.0)
+
+Processo 3: INICIANDO ELEICAO DO LIDER (tempo  1.0)
+Processo 3: ENVIA CANDIDATO (3) PARA O PROCESSO 4 (tempo  1.0)
+
+Processo 1: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (0) (tempo  2.0)
+	Lider local:  1
+	Mensagem descartada!
+
+Processo 2: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (1) (tempo  2.0)
+	Lider local:  2
+	Mensagem descartada!
+
+Processo 3: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (2) (tempo  2.0)
+	Lider local:  3
+	Mensagem descartada!
+
+Processo 4: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (3) (tempo  2.0)
+	Lider local:  -1
+	Lider local atualizado para 3
+Processo 4: ENVIA CANDIDATO (3) PARA O PROCESSO 0 (tempo  2.0)
+
+Processo 0: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (3) (tempo  3.0)
+	Lider local:  0
+	Lider local atualizado para 3
+Processo 0: ENVIA CANDIDATO (3) PARA O PROCESSO 1 (tempo  3.0)
+
+Processo 1: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (3) (tempo  4.0)
+	Lider local:  1
+	Lider local atualizado para 3
+Processo 1: ENVIA CANDIDATO (3) PARA O PROCESSO 2 (tempo  4.0)
+
+Processo 2: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (3) (tempo  5.0)
+	Lider local:  2
+	Lider local atualizado para 3
+Processo 2: ENVIA CANDIDATO (3) PARA O PROCESSO 3 (tempo  5.0)
+
+Processo 3: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (3) - LIDER ELEITO! (tempo  6.0)
+----------------------------------------------
+Lider Eleito...: 3
+Mensagens transmitidas: 8
+Mensagens descartadas.: 3
+Tempo Eleicao..:  5.0
+----------------------------------------------
+Estado final do anel:
+Processo 0: CORRETO, Lider Local: 3
+Processo 1: CORRETO, Lider Local: 3
+Processo 2: CORRETO, Lider Local: 3
+Processo 3: CORRETO, Lider Local: 3
+Processo 4: CORRETO, Lider Local: 3
+Processo 3: SOFREU FALHA (tempo 16.0)
+Processo 0: LIDER FALHO DETECTADO (tempo 35.0)
+Processo 1: LIDER FALHO DETECTADO (tempo 35.0)
+Processo 2: LIDER FALHO DETECTADO (tempo 35.0)
+Processo 3: LIDER FALHO DETECTADO (tempo 35.0)
+Processo 4: LIDER FALHO DETECTADO (tempo 35.0)
+Processo 0: INICIANDO ELEICAO DO LIDER (tempo 36.0)
+Processo 0: ENVIA CANDIDATO (0) PARA O PROCESSO 1 (tempo 36.0)
+
+Processo 1: INICIANDO ELEICAO DO LIDER (tempo 36.0)
+Processo 1: ENVIA CANDIDATO (1) PARA O PROCESSO 2 (tempo 36.0)
+
+Processo 2: INICIANDO ELEICAO DO LIDER (tempo 36.0)
+Processo 2: ENVIA CANDIDATO (2) PARA O PROCESSO 4 (tempo 36.0)
+
+Processo 3: FALHO, nao pode participar da eleicao (tempo 36.0)
+Processo 4: INICIANDO ELEICAO DO LIDER (tempo 36.0)
+Processo 4: ENVIA CANDIDATO (4) PARA O PROCESSO 0 (tempo 36.0)
+
+Processo 1: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (0) (tempo 37.0)
+	Lider local:  1
+	Mensagem descartada!
+
+Processo 2: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (1) (tempo 37.0)
+	Lider local:  2
+	Mensagem descartada!
+
+Processo 4: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (2) (tempo 37.0)
+	Lider local:  4
+	Mensagem descartada!
+
+Processo 0: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (4) (tempo 37.0)
+	Lider local:  0
+	Lider local atualizado para 4
+Processo 0: ENVIA CANDIDATO (4) PARA O PROCESSO 1 (tempo 37.0)
+
+Processo 1: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (4) (tempo 38.0)
+	Lider local:  1
+	Lider local atualizado para 4
+Processo 1: ENVIA CANDIDATO (4) PARA O PROCESSO 2 (tempo 38.0)
+
+Processo 2: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (4) (tempo 39.0)
+	Lider local:  2
+	Lider local atualizado para 4
+Processo 2: ENVIA CANDIDATO (4) PARA O PROCESSO 4 (tempo 39.0)
+
+Processo 4: RECEBEU MENSAGEM DE ELEICAO COM CANDIDATO (4) - LIDER ELEITO! (tempo 40.0)
+----------------------------------------------
+Lider Eleito...: 4
+Mensagens transmitidas: 15
+Mensagens descartadas.: 6
+Tempo Eleicao..:  4.0
+----------------------------------------------
+Estado final do anel:
+Processo 0: CORRETO, Lider Local: 4
+Processo 1: CORRETO, Lider Local: 4
+Processo 2: CORRETO, Lider Local: 4
+Processo 3: FALHO, Lider Local: -1
+Processo 4: CORRETO, Lider Local: 4
+
+**** Simulation Error at Time 40.000
+     Empty Event List

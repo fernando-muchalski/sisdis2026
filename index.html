@@ -172,18 +172,22 @@
             eleição de líder em anel e os respectivos logs de execução.
         </p>
         <p>
-            O primeiro algoritmo é baseado na versão de <a href="#chang"><strong>Chang-Roberts</strong></a>, em que candidatos enviam suas identificações ao longo do anel e o maior identificador se torna líder.
+            O primeiro algoritmo é baseado na versão de <a href="#chang"><strong>Chang-Roberts</strong></a>, em que
+            candidatos enviam suas identificações ao longo do anel e o maior identificador se torna líder.
         </p>
         <p>
-            O segundo é um algoritmo aleatorizado de eleição em rodadas <a href="#randomized"><strong>(Randomized Leader Election Algorithm)</strong></a>, onde processos sorteiam bits aleatórios e aqueles com bit 1 se tornam candidatos e continuam competindo, até haver um único líder.
+            O segundo é um algoritmo aleatorizado de eleição em rodadas <a href="#randomized"><strong>(Randomized Leader
+                    Election Algorithm)</strong></a>, onde processos sorteiam bits aleatórios e aqueles com bit 1 se
+            tornam candidatos e continuam competindo, até haver um único líder.
         </p>
     </div>
 
     <div class="section">
-        <h2 id = "chang">Algoritmo 1 (Chang-Roberts)</h2>
+        <h2 id="chang">Algoritmo 1 (Chang-Roberts)</h2>
         <h3>Descrição e Funcionamento do Algoritmo</h3>
         <p>
-            O algoritmo de <strong>Chang-Roberts</strong> é um algoritmo de eleição de líder para sistemas distribuídos organizados
+            O algoritmo de <strong>Chang-Roberts</strong> é um algoritmo de eleição de líder para sistemas distribuídos
+            organizados
             logicamente em anel. Nesse modelo, cada processo conhece o seu sucessor no anel e as mensagens circulam em
             uma única direção. O objetivo é escolher como líder o processo com maior identificador entre os processos
             candidatos participantes da eleição.
@@ -204,16 +208,21 @@ typedef struct
             Para iniciar a simulação, na chamada do programa via linha de comando o usuário deve informar o número total
             de processos (N). Além disso, opcionalmente, é possível informar o número de processos que serão candidatos
             a lider. Ao deixar de informar o número de candidatos, o programa calcula aleatoriamente a quantidade de
-            candidatos, garantindo que seja pelo menos 1 e no máximo N. Dessa forma, o programa proporciona flexibilidade
+            candidatos, garantindo que seja pelo menos 1 e no máximo N. Dessa forma, o programa proporciona
+            flexibilidade
             para testar diferentes cenários de eleição.
         </p>
         <p>
-            Ao iniciar o programa, um subconjunto de processos é escolhido como candidato, de acordo com a opção fornecida pelo usuário. Esses processos atualizam sua variável local <code>lider</code> para seu próprio identificador e
+            Ao iniciar o programa, um subconjunto de processos é escolhido como candidato, de acordo com a opção
+            fornecida pelo usuário. Esses processos atualizam sua variável local <code>lider</code> para seu próprio
+            identificador e
             marcam-se como candidatos (<code>sou_candidato = 1</code>).
         </p>
         <p>
-            Em seguida, ocorre o escalonamento dos processos candidatos. Cada processo candidato agenda um evento de eleição para ocorrer na unidade de tempo 1.0, o que representa o início da eleição do líder no sistema.
-            Cada processo candidato envia uma mensagem com um identificador vazio (-1) ao próprio processo. Essa mensagem é usada para identificar o início da eleição do líder.   
+            Em seguida, ocorre o escalonamento dos processos candidatos. Cada processo candidato agenda um evento de
+            eleição para ocorrer na unidade de tempo 1.0, o que representa o início da eleição do líder no sistema.
+            Cada processo candidato envia uma mensagem com um identificador vazio (-1) ao próprio processo. Essa
+            mensagem é usada para identificar o início da eleição do líder.
         </p>
         <pre>
         ...
@@ -223,49 +232,96 @@ typedef struct
             schedule(election, 1.0, i); // o processo candidato inicia a eleição do líder no tempo 1.0
         }
     </pre>
-        <p> 
-            No loop principal da simulação, ao receber um evento <code>election</code>, o processo executa a função <code>receberCandidato()</code>, que é responsável por processar as mensagens de eleição recebidas. Essa função retornará o identificador do candidato recebido.
+        <p>
+            No loop principal da simulação, ao receber um evento <code>election</code>, o processo executa a função
+            <code>receberCandidato()</code>, que é responsável por processar as mensagens de eleição recebidas. Essa
+            função retornará o identificador do candidato recebido.
         </p>
         <p>
-            Caso o identificador do candidado recebido seja -1, isso indica que o processo recebeu a mensagem de início da eleição, ou seja, a mensagem que ele mesmo enviou no início. Nesse caso, sendo o processo um candidato, ele se considera lider e envia a mensagem com o seu identificador para o próximo processo correto no anel, dando início à circulação das mensagens de eleição.
-        </p>    
-        <p>    
-            Por outro lado, caso o identificador recebido seja de um candidato válido, o processo compara esse identificador com o identificador do candidato a lider que conhece localmente. Podendo ocorrer as seguintes situações:
+            Caso o identificador do candidado recebido seja -1, isso indica que o processo recebeu a mensagem de início
+            da eleição, ou seja, a mensagem que ele mesmo enviou no início. Nesse caso, sendo o processo um candidato,
+            ele se considera lider e envia a mensagem com o seu identificador para o próximo processo correto no anel,
+            dando início à circulação das mensagens de eleição.
+        </p>
+        <p>
+            Por outro lado, caso o identificador recebido seja de um candidato válido, o processo compara esse
+            identificador com o identificador do candidato a lider que conhece localmente. Podendo ocorrer as seguintes
+            situações:
         </p>
         <ol>
-            <li>O candidato recebido é MAIOR que o lider local (<code>candidato > processo[i].lider</code>): o processo atualiza sua informação local e encaminha esse candidato adiante no anel</li><br>
+            <li>O candidato recebido é MAIOR que o lider local (<code>candidato > processo[i].lider</code>): o processo
+                atualiza sua informação local e encaminha esse candidato adiante no anel</li><br>
 
-            <li>O candidato recebido é MENOR que o líder local (<code>candidato < processo[i].lider</code>): a mensagem é descartada, pois existe um candidato melhor circulando ou já conhecido. Dessa forma, candidatos com identificadores menores tendem a ser eliminados ao longo da circulação das mensagens</li><br>
+            <li>O candidato recebido é MENOR que o líder local (<code>candidato < processo[i].lider</code>): a mensagem
+                é descartada, pois existe um candidato melhor circulando ou já conhecido. Dessa forma, candidatos com
+                identificadores menores tendem a ser eliminados ao longo da circulação das mensagens</li><br>
 
-            <li>O candidato recebido é IGUAL ao líder local (<code>candidato == processo[i].lider</code>): nesse momento a eleição termina. Isso significa que sua mensagem percorreu o anel e não foi descartada por nenhum processo com identificador maior. Portanto, esse processo conclui que possui o maior identificador entre os candidatos participantes e se declara líder.</li>
+            <li>O candidato recebido é IGUAL ao líder local (<code>candidato == processo[i].lider</code>): nesse momento
+                a eleição termina. Isso significa que sua mensagem percorreu o anel e não foi descartada por nenhum
+                processo com identificador maior. Portanto, esse processo conclui que possui o maior identificador entre
+                os candidatos participantes e se declara líder.</li>
         </ol>
-            
+
         <h3>Considerações</h3>
-        <p>                  
-            No código apresentado, a comunicação entre processos é simulada por filas de mensagens, uma para cada processo. A função <code>encaminharCandidato()</code> insere uma mensagem de eleição na fila do processo destino, enquanto <code>receberCandidato()</code> remove a primeira mensagem pendente da fila do processo que está executando o evento de
-            eleição. 
+        <p>
+            No código apresentado, a comunicação entre processos é simulada por filas de mensagens, uma para cada
+            processo. A função <code>encaminharCandidato()</code> insere uma mensagem de eleição na fila do processo
+            destino, enquanto <code>receberCandidato()</code> remove a primeira mensagem pendente da fila do processo
+            que está executando o evento de
+            eleição.
         </p>
         <p>
-            Como o SMPL é usado para escalonar eventos no tempo, para esse algoritmo foi criado um evento <code>election</code>, sinalizando que o processo de eleição está acontecedo. A simulação também prevê a existência de falhas e recuperações, mas esses eventos não são efetivamente escalonados no programa atual. Ainda assim, a lógica de eleição tenta ignorar processos falhos ao procurar o próximo processo correto no anel. Isso adapta o anel lógico para que a mensagem de eleição continue circulando apenas entre processos considerados corretos. 
+            Como o SMPL é usado para escalonar eventos no tempo, para esse algoritmo foi criado um evento
+            <code>election</code>, sinalizando que o processo de eleição está acontecedo. A simulação também prevê a
+            existência de falhas e recuperações, mas esses eventos não são efetivamente escalonados no programa atual.
+            Ainda assim, a lógica de eleição tenta ignorar processos falhos ao procurar o próximo processo correto no
+            anel. Isso adapta o anel lógico para que a mensagem de eleição continue circulando apenas entre processos
+            considerados corretos.
         </p>
         <p>
-            No programa também foram agendados testes periódicos para verificar o estado do processo lider. Esses testes ocorrem a cada 10 unidades de tempo. Porém, como o programa é focado na eleição do líder, esses eventos de teste não são inicialmente escalonados. No entanto, em uma implementação futura, eles poderiam ser usados para implementar uma lógica de detecção de falhas do líder e iniciar uma nova eleição caso o líder falhasse durante a simulação.
+            No programa também foram agendados testes periódicos para verificar o estado do processo lider. Esses testes
+            ocorrem a cada 10 unidades de tempo. Porém, como o programa é focado na eleição do líder, esses eventos de
+            teste não são inicialmente escalonados. No entanto, em uma implementação futura, eles poderiam ser usados
+            para implementar uma lógica de detecção de falhas do líder e iniciar uma nova eleição caso o líder falhasse
+            durante a simulação.
         </p>
         <h3>Logs e explicações</h3>
         <p>
-            O código-fonte da implementação do algoritmo Chang-Roberts está disponível em: <a href="trabalho1/chang-roberts.c.txt"
-                target="_blank">chang-roberts.c</a>. 
+            O código-fonte da implementação do algoritmo Chang-Roberts está disponível em: <a
+                href="trabalho1/chang-roberts.c.txt" target="_blank">chang-roberts.c</a>.
         </p>
         <p>
-            Nessa simualação foram realizados três testes principais, com diferentes configurações de candidatos, para avaliar o comportamento do algoritmo em cada cenário. Os logs correspondentes a cada teste estão listados abaixo:
+            Nessa simulação foram realizados três testes principais, com diferentes configurações de candidatos, para
+            avaliar o comportamento do algoritmo em cada cenário. Também foi executado um teste adicional, onde foi
+            simulado a falha do lider eleito. Os logs correspondentes a cada teste estão listados abaixo:
         </p>
         <ul>
-            <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 10 processos e 1 candidato. <pre>$ ./chang-roberts 10 1</pre></li>
-            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com 10 processos todos os processos como candidatos. <pre>$ ./chang-roberts 10 10</pre></li>
-            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução com 10 processos e candidatos aleatórios. Nesse caso o programa sorteou aleatoriamente 4 processos. <pre>$ ./chang-roberts 10</pre>. </li>
+            <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 10 processos e 1
+                candidato.
+                <pre>$ ./chang-roberts 10 1</pre>
+            </li>
+            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com 10 processos
+                todos os processos como candidatos.
+                <pre>$ ./chang-roberts 10 10</pre>
+            </li>
+            <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução com 10
+                processos e candidatos aleatórios. Nesse caso o programa sorteou aleatoriamente 4 processos.
+                <pre>$ ./chang-roberts 10</pre>.
+            </li>
+            <li><a href="trabalho1/chang-falha.log.txt" target="_blank">chang-falha.log.txt</a> — execução com 5
+                processos e candidatos aleatórios. Nesse caso o programa foi ajustado para simular uma falha do lider
+                após a primeira eleição. No evento <code>test</code>, realizado periodicamente, o processo que detectou
+                a falha do lider se coloca como candidato e inicia uma nova eleição, agendando um novo evento
+                <code>election</code>.
+                <pre>$ ./chang-roberts 5</pre>.
+            </li>
         </ul>
         <p>
-            Os logs apresentam a dinâmica da eleição do líder, mostrando os candidatos participantes, as mensagens de eleição circulando no anel, as mensagens descartadas e o processo eleito como líder. Após eleito, são apresentados: o processo lider, o número de mensagens trocadas e descartadas e o tempo total de simulação para cada cenário. Ao final, também são apresentados o estado final de cada processo do anel, verificando se todos reconhecem o mesmo processo como lider.
+            Os logs apresentam a dinâmica da eleição do líder, mostrando os candidatos participantes, as mensagens de
+            eleição circulando no anel, as mensagens descartadas e o processo eleito como líder. Após eleito, são
+            apresentados: o processo lider, o número de mensagens trocadas e descartadas e o tempo total de simulação
+            para cada cenário. Ao final, também são apresentados o estado final de cada processo do anel, verificando se
+            todos reconhecem o mesmo processo como lider.
         </p>
         <p>
             Esses resultados permitem analisar a eficiência do algoritmo em diferentes condições de eleição.
@@ -273,13 +329,18 @@ typedef struct
     </div>
 
     <div class="section">
-        <h2 id = "randomized">Algoritmo 2 (Randomized)</h2>
+        <h2 id="randomized">Algoritmo 2 (Randomized)</h2>
         <h3>Descrição e Funcionamento do Algoritmo</h3>
         <p>
-            O <strong>Randomized Leader Election Algorithm</strong> é um algoritmo probabilístico de eleição de líder que funciona em <strong>rodadas</strong>. Diferentemente do algoritmo de Chang-Roberts, que elimina iterativamente candidatos menores, o algoritmo aleatorizado permite que cada processo tome decisões independentes em cada rodada por meio de sorteios aleatórios.
+            O <strong>Randomized Leader Election Algorithm</strong> é um algoritmo probabilístico de eleição de líder
+            que funciona em <strong>rodadas</strong>. Diferentemente do algoritmo de Chang-Roberts, que elimina
+            iterativamente candidatos menores, o algoritmo aleatorizado permite que cada processo tome decisões
+            independentes em cada rodada por meio de sorteios aleatórios.
         </p>
         <p>
-            Em cada rodada, todos os processos candidatos geram um <strong>bit aleatório</strong> (0 ou 1). Apenas os processos que sorteiam bit = 1 permanecem como candidatos para a próxima rodada. Essas informações circulam no anel, e o algoritmo continua até que apenas um processo se declare como líder.
+            Em cada rodada, todos os processos candidatos geram um <strong>bit aleatório</strong> (0 ou 1). Apenas os
+            processos que sorteiam bit = 1 permanecem como candidatos para a próxima rodada. Essas informações circulam
+            no anel, e o algoritmo continua até que apenas um processo se declare como líder.
         </p>
         <p>
             Na simulação implementada, cada processo mantém estruturas de dados para rastrear seus bits em cada rodada:
@@ -296,47 +357,78 @@ typedef struct
 } TipoProcesso;
         </pre>
         <p>
-            Ao iniciar o programa, o usuário fornece o número total de processos (N) via linha de comando. Todos os processos começam com seus bits inicializados para 1, indicando que todos são candidatos na "Rodada 0". Uma mensagem de eleição é enfileirada para cada processo e agendada para iniciar a eleição no tempo 1.0.
+            Ao iniciar o programa, o usuário fornece o número total de processos (N) via linha de comando. Todos os
+            processos começam com seus bits inicializados para 1, indicando que todos são candidatos na "Rodada 0". Uma
+            mensagem de eleição é enfileirada para cada processo e agendada para iniciar a eleição no tempo 1.0.
         </p>
         <p>
-            No loop principal da simulação, ao receber um evento <code>election</code>, o processo recebe a mensagem enfileirada e processa o bit do processo contido nela. O processo incrementa seu contador de mensagens recebidas. Quando todos os bits da rodada forem recebidos (contador = N), o processo executa as seguintes verificações:
+            A estratégia de criar uma "rodada 0" foi adotada para simplificar a lógica de eleição, servindo como gatilho
+            para a inicialização da eleição. Como todos os processos começam com seus bits definidos para 1, cada processo assume que as informações dos demais candidatos já estão disponíveis ao receber a mensagem de eleição. Dessa forma, o sorteio do bit aleatório da primeira rodada efetiva pode ser realizado imediatamente, sem a necessidade de uma fase adicional de sincronização ou descoberta dos candidatos iniciais.
+        </p>
+        <p>
+            No loop principal da simulação, ao receber um evento <code>election</code>, o processo recebe a mensagem
+            enfileirada e processa o bit do processo contido nela. O processo incrementa seu contador de mensagens
+            recebidas. Quando todos os bits da rodada forem recebidos (contador = N), o processo chama a função <code>contaCandidatos</code> para buscar a quantidade de processos com bit = 1 recebidos, em seguida, executa as seguintes
+            verificações:
         </p>
         <ol>
-            <li><strong>Um único candidato (1 bit = 1):</strong> O processo identifica esse candidato como líder e encerra a eleição, informando o número de mensagens trocadas, descartadas e o tempo total de eleição.</li><br>
-            <li><strong>Nenhum candidato (todos bits = 0):</strong> Restaura o vetor de bits da rodada anterior e decrementa o contador de rodada para tentar novamente.</li><br>
-            <li><strong>Múltiplos candidatos:</strong> Inicia uma nova rodada. Os processos com bit = 1 geram novo número aleatório; os com bit = 0 descardam mensagens e não participam mais da eleição.</li>
+            <li><strong>Um único candidato (1 bit = 1):</strong> O processo identifica esse candidato como líder e
+                encerra a eleição, informando o número de mensagens trocadas, descartadas e o tempo total de eleição.
+            </li><br>
+            <li><strong>Nenhum candidato (todos bits = 0):</strong> A rodada é considerada inconclusiva, pois nenhum processo permanece candidato. Nesse caso, o vetor de bits é restaurado para o estado da rodada anterior e o contador de rodadas é decrementado, permitindo que uma nova tentativa seja realizada com os mesmos candidatos anteriores.</li><br>
+            <li><strong>Múltiplos candidatos:</strong> Inicia uma nova rodada. Os processos com bit = 1 geram novo
+                número aleatório; os com bit = 0 descartam mensagens e não participam mais da eleição.</li>
         </ol>
         <p>
-            A vantagem do algoritmo aleatorizado é que ele não requer conhecimento de topologia nem ordenação total de identificadores. Contudo, sua eficiência depende da qualidade da geração de números aleatórios e pode exigir múltiplas rodadas em cenários com muitos candidatos.
+            A vantagem do algoritmo aleatorizado é que ele não requer conhecimento de topologia nem ordenação total de
+            identificadores. Contudo, sua eficiência depende da qualidade da geração de números aleatórios e pode exigir
+            múltiplas rodadas em cenários com muitos candidatos.
         </p>
         <h3>Considerações</h3>
         <p>
-            O código usa uma estrutura de <strong>fila de mensagens</strong> para cada processo, de forma similar ao algoritmo de Chang-Roberts. A função <code>encaminharCandidato()</code> insere uma mensagem de eleição na fila do processo destino, enquanto <code>receberCandidato()</code> remove e processa a primeira mensagem pendente.
+            O código usa uma estrutura de <strong>fila de mensagens</strong> para cada processo, de forma similar ao
+            algoritmo de Chang-Roberts. A função <code>encaminharCandidato()</code> insere uma mensagem de eleição na
+            fila do processo destino, enquanto <code>receberCandidato()</code> remove e processa a primeira mensagem
+            pendente.
         </p>
         <p>
-            A aleatoriedade é controlada pela função <code>rand() % 2</code>, que gera 0 ou 1 com probabilidade teórica de 50% cada. Isso garante que, com alta probabilidade, o número de candidatos diminua exponencialmente a cada rodada, levando a convergência rápida para um único líder em N processos (em média O(log N) rodadas).
+            A aleatoriedade é controlada pela função <code>rand() % 2</code>, que gera 0 ou 1 com probabilidade teórica
+            de 50% cada. Isso garante que, com alta probabilidade, o número de candidatos diminua exponencialmente a
+            cada rodada, levando a convergência rápida para um único líder em N processos (em média O(log N) rodadas).
         </p>
         <p>
-            O programa também monitora o número de mensagens transmitidas e descartadas, permitindo análise comparativa com o algoritmo de Chang-Roberts. Além disso, o tempo de simulação (tempo SMPL) é registrado, oferecendo medidas de desempenho em diferentes configurações de N.
+            O programa também monitora o número de mensagens transmitidas e descartadas, permitindo análise comparativa
+            com o algoritmo de Chang-Roberts. Além disso, o tempo de simulação (tempo SMPL) é registrado, oferecendo
+            medidas de desempenho em diferentes configurações de N.
         </p>
         <h3>Logs e explicações</h3>
         <p>
-            O código-fonte da implementação do algoritmo aleatorizado está disponível em: <a href="trabalho1/randomized.c.txt"
-                target="_blank">randomized.c</a>. 
+            O código-fonte da implementação do algoritmo aleatorizado está disponível em: <a
+                href="trabalho1/randomized.c.txt" target="_blank">randomized.c</a>.
         </p>
         <p>
-            Foram realizadas execuções com diferentes quantidades de processos para avaliar o comportamento do algoritmo. Os logs correspondentes a cada teste estão listados abaixo:
+            Foram realizadas execuções com diferentes quantidades de processos para avaliar o comportamento do
+            algoritmo. Os logs correspondentes a cada teste estão listados abaixo:
         </p>
         <ul>
-            <li><a href="trabalho1/random-3.log.txt" target="_blank">random-3.log.txt</a> — execução com 3 processos. <pre>$ ./randomized 3</pre></li>
-            <li><a href="trabalho1/random-7.log.txt" target="_blank">random-7.log.txt</a> — execução com 7 processos. <pre>$ ./randomized 7</pre></li>
-            <li><a href="trabalho1/random-10.log.txt" target="_blank">random-10.log.txt</a> — execução com 10 processos. <pre>$ ./randomized 10</pre></li>
+            <li><a href="trabalho1/random-3.log.txt" target="_blank">random-3.log.txt</a> — execução com 3 processos.
+                <pre>$ ./randomized 3</pre>
+            </li>
+            <li><a href="trabalho1/random-7.log.txt" target="_blank">random-7.log.txt</a> — execução com 7 processos.
+                <pre>$ ./randomized 7</pre>
+            </li>
+            <li><a href="trabalho1/random-10.log.txt" target="_blank">random-10.log.txt</a> — execução com 10 processos.
+                <pre>$ ./randomized 10</pre>
+            </li>
         </ul>
         <p>
-            Os logs apresentam a dinâmica da eleição em rodadas, mostrando os bits sorteados em cada rodada, os candidatos remanescentes, as mensagens circulando no anel e o processo eleito como líder. Ao final de cada execução, são registrados: o processo líder eleito, o número de mensagens trocadas e descartadas, o número de rodadas e o tempo total de simulação (SMPL) para cada cenário.
+            Os logs apresentam a dinâmica da eleição em rodadas, mostrando os bits sorteados em cada rodada, os
+            candidatos remanescentes, as mensagens circulando no anel e o processo eleito como líder. Ao final de cada
+            execução, são registrados: o processo líder eleito, o número de mensagens trocadas e descartadas, o número
+            de rodadas e o tempo total de simulação (SMPL) para cada cenário.
         </p>
         <p>
-            Esses resultados permitem comparar a eficiência do algoritmo aleatorizado com o Chang-Roberts em termos de número de mensagens, rodadas necessárias e tempo de convergência.
+            Também é possível observar que, como as mensagens de eleição percorrem todo o anel, ao término de cada rodada todos os processos possuem uma visão consistente do conjunto de candidatos remanescentes. Dessa forma, quando uma rodada produz exatamente um candidato, todos os processos identificam localmente o mesmo processo como líder, por isso, o anúncio do lider no log é realizado por todos os processos.
         </p>
     </div>
 
@@ -346,14 +438,20 @@ typedef struct
             Este trabalho prático demonstrou a implementação de algoritmos fundamentais de computação distribuída utilizando o simulador SMPL. A progressão do <strong>Trabalho Prático 0</strong> para o <strong>Trabalho Prático 1</strong> refletiu o aprendizado gradativo de conceitos essenciais: desde testes de falhas e monitoramento de processos até algoritmos complexos de eleição de líder em topologia de anel (vRing).
         </p>
         <p>
-            O estudo dos algoritmos de <strong>Chang-Roberts</strong> e <strong>Randomized Leader Election</strong> evidenciou diferentes abordagens para o problema de eleição de lider. Enquanto o primeiro utiliza determinismo e ordenação de identificadores, o segundo aproveita a aleatoriedade. Ambas as abordagens possuem vantagens e limitações que dependem do contexto de aplicação.
+            O estudo dos algoritmos de <strong>Chang-Roberts</strong> e <strong>Randomized Leader Election</strong>
+            evidenciou diferentes abordagens para o problema de eleição de lider. Enquanto o primeiro utiliza
+            determinismo e ordenação de identificadores, o segundo aproveita a aleatoriedade. Ambas as abordagens
+            possuem vantagens e limitações que dependem do contexto de aplicação.
         </p>
         <p>
-            Os resultados obtidos através das simulações permitirão medir e comparar métricas como número de mensagens trocadas, tempo de convergência e eficiência em diferentes configurações de quantidade de processos, oferecendo informações importantes sobre o comportamento de sistemas distribuídos.
+            Os resultados obtidos através das simulações permitirão medir e comparar métricas como número de mensagens
+            trocadas, tempo de convergência e eficiência em diferentes configurações de quantidade de processos,
+            oferecendo informações importantes sobre o comportamento de sistemas distribuídos.
         </p>
         <p>
             O código-fonte completo deste projeto está disponível no repositório GitHub:
-            <br><strong><a href="https://github.com/fernando-muchalski/ufpr-sisdis-2026" target="_blank">https://github.com/fernando-muchalski/ufpr-sisdis-2026</a></strong>
+            <br><strong><a href="https://github.com/fernando-muchalski/ufpr-sisdis-2026"
+                    target="_blank">https://github.com/fernando-muchalski/ufpr-sisdis-2026</a></strong>
         </p>
     </div>
 
