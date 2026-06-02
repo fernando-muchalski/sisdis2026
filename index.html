@@ -48,6 +48,10 @@
             text-decoration: underline;
         }
 
+        li {
+            margin-bottom: 10px;
+        }
+
         pre {
             background: #eee;
             padding: 10px;
@@ -101,7 +105,7 @@
             distribuídos.
         </p>
         <p>
-            Ao longo das atividades, os programas desenvolvidos evoluiram gradativamente em complexidade, iniciando com
+            Ao longo das atividades, os programas desenvolvidos evoluíram gradativamente em complexidade, iniciando com
             a execução de um exemplo básico e avançando para implementações relacionadas a testes de falhas,
             monitoramento de processos e manutenção de informações de estado em um sistema organizado em anel.
         </p>
@@ -200,14 +204,14 @@
 typedef struct
 {
     int id;            // Identificador de facility do SMPL
-    int lider;         // Variável para armazenar o identificador do processo lider
+    int lider;         // Variável para armazenar o identificador do processo líder
     int sou_candidato; // Variável para indicar se o processo é um candidato à liderança (1) ou não (0)
 } TipoProcesso;
             </pre>
         <p>
             Para iniciar a simulação, na chamada do programa via linha de comando o usuário deve informar o número total
             de processos (N). Além disso, opcionalmente, é possível informar o número de processos que serão candidatos
-            a lider. Ao deixar de informar o número de candidatos, o programa calcula aleatoriamente a quantidade de
+            a líder. Ao deixar de informar o número de candidatos, o programa calcula aleatoriamente a quantidade de
             candidatos, garantindo que seja pelo menos 1 e no máximo N. Dessa forma, o programa proporciona
             flexibilidade
             para testar diferentes cenários de eleição.
@@ -238,23 +242,23 @@ typedef struct
             função retornará o identificador do candidato recebido.
         </p>
         <p>
-            Caso o identificador do candidado recebido seja -1, isso indica que o processo recebeu a mensagem de início
+            Caso o identificador do candidato recebido seja -1, isso indica que o processo recebeu a mensagem de início
             da eleição, ou seja, a mensagem que ele mesmo enviou no início. Nesse caso, sendo o processo um candidato,
-            ele se considera lider e envia a mensagem com o seu identificador para o próximo processo correto no anel,
+            ele se considera líder e envia a mensagem com o seu identificador para o próximo processo correto no anel,
             dando início à circulação das mensagens de eleição.
         </p>
         <p>
             Por outro lado, caso o identificador recebido seja de um candidato válido, o processo compara esse
-            identificador com o identificador do candidato a lider que conhece localmente. Podendo ocorrer as seguintes
+            identificador com o identificador do candidato a líder que conhece localmente. Podendo ocorrer as seguintes
             situações:
         </p>
         <ol>
-            <li>O candidato recebido é MAIOR que o lider local (<code>candidato > processo[i].lider</code>): o processo
-                atualiza sua informação local e encaminha esse candidato adiante no anel</li><br>
+            <li>O candidato recebido é MAIOR que o líder local (<code>candidato > processo[i].lider</code>): o processo
+                atualiza sua informação local e encaminha esse candidato adiante no anel</li>
 
             <li>O candidato recebido é MENOR que o líder local (<code>candidato < processo[i].lider</code>): a mensagem
                 é descartada, pois existe um candidato melhor circulando ou já conhecido. Dessa forma, candidatos com
-                identificadores menores tendem a ser eliminados ao longo da circulação das mensagens</li><br>
+                identificadores menores tendem a ser eliminados ao longo da circulação das mensagens</li>
 
             <li>O candidato recebido é IGUAL ao líder local (<code>candidato == processo[i].lider</code>): nesse momento
                 a eleição termina. Isso significa que sua mensagem percorreu o anel e não foi descartada por nenhum
@@ -272,14 +276,14 @@ typedef struct
         </p>
         <p>
             Como o SMPL é usado para escalonar eventos no tempo, para esse algoritmo foi criado um evento
-            <code>election</code>, sinalizando que o processo de eleição está acontecedo. A simulação também prevê a
+            <code>election</code>, sinalizando que o processo de eleição está acontecendo. A simulação também prevê a
             existência de falhas e recuperações, mas esses eventos não são efetivamente escalonados no programa atual.
             Ainda assim, a lógica de eleição tenta ignorar processos falhos ao procurar o próximo processo correto no
             anel. Isso adapta o anel lógico para que a mensagem de eleição continue circulando apenas entre processos
             considerados corretos.
         </p>
         <p>
-            No programa também foram agendados testes periódicos para verificar o estado do processo lider. Esses testes
+            No programa também foram agendados testes periódicos para verificar o estado do processo líder. Esses testes
             ocorrem a cada 10 unidades de tempo. Porém, como o programa é focado na eleição do líder, esses eventos de
             teste não são inicialmente escalonados. No entanto, em uma implementação futura, eles poderiam ser usados
             para implementar uma lógica de detecção de falhas do líder e iniciar uma nova eleição caso o líder falhasse
@@ -293,35 +297,35 @@ typedef struct
         <p>
             Nessa simulação foram realizados três testes principais, com diferentes configurações de candidatos, para
             avaliar o comportamento do algoritmo em cada cenário. Também foi executado um teste adicional, onde foi
-            simulado a falha do lider eleito. Os logs correspondentes a cada teste estão listados abaixo:
+            simulada a falha do lider eleito. Os logs correspondentes a cada teste estão listados abaixo:
         </p>
         <ul>
             <li><a href="trabalho1/chang-1.log.txt" target="_blank">chang-1.log.txt</a> — execução com 10 processos e 1
                 candidato.
                 <pre>$ ./chang-roberts 10 1</pre>
             </li>
-            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com 10 processos
+            <li><a href="trabalho1/chang-N.log.txt" target="_blank">chang-N.log.txt</a> — execução com 10 processos com
                 todos os processos como candidatos.
                 <pre>$ ./chang-roberts 10 10</pre>
             </li>
             <li><a href="trabalho1/chang-rand.log.txt" target="_blank">chang-rand.log.txt</a> — execução com 10
                 processos e candidatos aleatórios. Nesse caso o programa sorteou aleatoriamente 4 processos.
-                <pre>$ ./chang-roberts 10</pre>.
+                <pre>$ ./chang-roberts 10</pre>
             </li>
             <li><a href="trabalho1/chang-falha.log.txt" target="_blank">chang-falha.log.txt</a> — execução com 5
                 processos e candidatos aleatórios. Nesse caso o programa foi ajustado para simular uma falha do lider
                 após a primeira eleição. No evento <code>test</code>, realizado periodicamente, o processo que detectou
                 a falha do lider se coloca como candidato e inicia uma nova eleição, agendando um novo evento
                 <code>election</code>.
-                <pre>$ ./chang-roberts 5</pre>.
+                <pre>$ ./chang-roberts 5</pre>
             </li>
         </ul>
         <p>
             Os logs apresentam a dinâmica da eleição do líder, mostrando os candidatos participantes, as mensagens de
             eleição circulando no anel, as mensagens descartadas e o processo eleito como líder. Após eleito, são
-            apresentados: o processo lider, o número de mensagens trocadas e descartadas e o tempo total de simulação
+            apresentados: o processo líder, o número de mensagens trocadas e descartadas e o tempo total de simulação
             para cada cenário. Ao final, também são apresentados o estado final de cada processo do anel, verificando se
-            todos reconhecem o mesmo processo como lider.
+            todos reconhecem o mesmo processo como líder.
         </p>
         <p>
             Esses resultados permitem analisar a eficiência do algoritmo em diferentes condições de eleição.
@@ -340,7 +344,8 @@ typedef struct
         <p>
             Em cada rodada, todos os processos candidatos geram um <strong>bit aleatório</strong> (0 ou 1). Apenas os
             processos que sorteiam bit = 1 permanecem como candidatos para a próxima rodada. Essas informações circulam
-            no anel, e o algoritmo continua até que apenas um processo se declare como líder.
+            no anel, e o algoritmo continua até que reste apenas um candidato, o qual é então identificado por todos os
+            processos como líder.
         </p>
         <p>
             Na simulação implementada, cada processo mantém estruturas de dados para rastrear seus bits em cada rodada:
@@ -362,20 +367,30 @@ typedef struct
             mensagem de eleição é enfileirada para cada processo e agendada para iniciar a eleição no tempo 1.0.
         </p>
         <p>
-            A estratégia de criar uma "rodada 0" foi adotada para simplificar a lógica de eleição, servindo como gatilho
-            para a inicialização da eleição. Como todos os processos começam com seus bits definidos para 1, cada processo assume que as informações dos demais candidatos já estão disponíveis ao receber a mensagem de eleição. Dessa forma, o sorteio do bit aleatório da primeira rodada efetiva pode ser realizado imediatamente, sem a necessidade de uma fase adicional de sincronização ou descoberta dos candidatos iniciais.
+            A estratégia de introduzir uma "rodada 0" foi adotada para simplificar a lógica de eleição, servindo como
+            gatilho
+            para a inicialização da eleição. Como todos os processos começam com seus bits definidos para 1, cada
+            processo assume que as informações dos demais candidatos já estão disponíveis ao receber a mensagem de
+            eleição. Dessa forma, o sorteio do bit aleatório da primeira rodada efetiva pode ser realizado
+            imediatamente, sem a necessidade de uma fase adicional de sincronização ou descoberta dos candidatos
+            iniciais.
         </p>
         <p>
             No loop principal da simulação, ao receber um evento <code>election</code>, o processo recebe a mensagem
             enfileirada e processa o bit do processo contido nela. O processo incrementa seu contador de mensagens
-            recebidas. Quando todos os bits da rodada forem recebidos (contador = N), o processo chama a função <code>contaCandidatos</code> para buscar a quantidade de processos com bit = 1 recebidos, em seguida, executa as seguintes
+            recebidas. Quando todos os bits da rodada são recebidos (contador = N), o processo chama a função
+            <code>contaCandidatos</code> para buscar a quantidade de processos com bit = 1 recebidos, em seguida,
+            executa as seguintes
             verificações:
         </p>
         <ol>
             <li><strong>Um único candidato (1 bit = 1):</strong> O processo identifica esse candidato como líder e
                 encerra a eleição, informando o número de mensagens trocadas, descartadas e o tempo total de eleição.
-            </li><br>
-            <li><strong>Nenhum candidato (todos bits = 0):</strong> A rodada é considerada inconclusiva, pois nenhum processo permanece candidato. Nesse caso, o vetor de bits é restaurado para o estado da rodada anterior e o contador de rodadas é decrementado, permitindo que uma nova tentativa seja realizada com os mesmos candidatos anteriores.</li><br>
+            </li>
+            <li><strong>Nenhum candidato (todos bits = 0):</strong> A rodada é considerada inconclusiva, pois nenhum
+                processo permanece candidato. Nesse caso, o vetor de bits é restaurado para o estado da rodada anterior
+                e o contador de rodadas é decrementado, permitindo que uma nova tentativa seja realizada com os mesmos
+                candidatos anteriores.</li>
             <li><strong>Múltiplos candidatos:</strong> Inicia uma nova rodada. Os processos com bit = 1 geram novo
                 número aleatório; os com bit = 0 descartam mensagens e não participam mais da eleição.</li>
         </ol>
@@ -428,23 +443,29 @@ typedef struct
             de rodadas e o tempo total de simulação (SMPL) para cada cenário.
         </p>
         <p>
-            Também é possível observar que, como as mensagens de eleição percorrem todo o anel, ao término de cada rodada todos os processos possuem uma visão consistente do conjunto de candidatos remanescentes. Dessa forma, quando uma rodada produz exatamente um candidato, todos os processos identificam localmente o mesmo processo como líder, por isso, o anúncio do lider no log é realizado por todos os processos.
+            Também é possível observar que, como as mensagens de eleição percorrem todo o anel, ao término de cada
+            rodada todos os processos possuem uma visão consistente do conjunto de candidatos remanescentes. Dessa
+            forma, quando uma rodada produz exatamente um candidato, todos os processos identificam localmente o mesmo
+            processo como líder. Por esse motivo, o anúncio do líder no log é realizado por todos os processos.
         </p>
     </div>
 
     <div class="section">
         <h2>Considerações Finais</h2>
         <p>
-            Este trabalho prático demonstrou a implementação de algoritmos fundamentais de computação distribuída utilizando o simulador SMPL. A progressão do <strong>Trabalho Prático 0</strong> para o <strong>Trabalho Prático 1</strong> refletiu o aprendizado gradativo de conceitos essenciais: desde testes de falhas e monitoramento de processos até algoritmos complexos de eleição de líder em topologia de anel (vRing).
+            Este trabalho prático demonstrou a implementação de algoritmos fundamentais de sistemas distribuídos
+            utilizando o simulador SMPL. A progressão do <strong>Trabalho Prático 0</strong> para o <strong>Trabalho
+                Prático 1</strong> refletiu o aprendizado gradativo de conceitos essenciais: desde testes de falhas e
+            monitoramento de processos até algoritmos complexos de eleição de líder em topologia de anel (vRing).
         </p>
         <p>
             O estudo dos algoritmos de <strong>Chang-Roberts</strong> e <strong>Randomized Leader Election</strong>
-            evidenciou diferentes abordagens para o problema de eleição de lider. Enquanto o primeiro utiliza
+            evidenciou diferentes abordagens para o problema de eleição de líder. Enquanto o primeiro utiliza
             determinismo e ordenação de identificadores, o segundo aproveita a aleatoriedade. Ambas as abordagens
             possuem vantagens e limitações que dependem do contexto de aplicação.
         </p>
         <p>
-            Os resultados obtidos através das simulações permitirão medir e comparar métricas como número de mensagens
+            Os resultados obtidos através das simulações permitem medir e comparar métricas como número de mensagens
             trocadas, tempo de convergência e eficiência em diferentes configurações de quantidade de processos,
             oferecendo informações importantes sobre o comportamento de sistemas distribuídos.
         </p>
